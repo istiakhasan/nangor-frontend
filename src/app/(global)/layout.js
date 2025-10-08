@@ -1,0 +1,23 @@
+import { Suspense } from "react";
+import Footer from "../../component/Footer";
+import HeaderTop from "../../component/HeaderTop";
+import MenuBar from "../../component/MenuBar";
+import SubscriptionSection from "../../component/SubscriptionSection";
+import TopSearchBar from "../../component/TopSearchBar";
+
+const GlobalLayout = ({ children }) => {
+  return (
+   <Suspense fallback={<div>Loading cart...</div>}>
+      <div className="">
+        <HeaderTop />
+        <TopSearchBar />
+        <MenuBar />
+        {children}
+        <SubscriptionSection />
+        <Footer />
+      </div>
+    </Suspense>
+  );
+};
+
+export default GlobalLayout;

@@ -1,0 +1,381 @@
+.stock-status.out-stock {
+    color: rgb(247, 75, 129);
+    background: rgb(253, 224, 233);
+}
+
+.stock-status {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-family: Quicksand, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.product-detail-rating{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0px;
+}
+
+.product-rate {
+    background-image: url('https://nest-frontend-v6.vercel.app/assets/imgs/theme/rating-stars.png');
+    background-repeat: repeat-x;
+    height: 12px;
+    width: 60px;
+    background-position: 0px -12px;
+    transition: 0.5s ease-out;
+}
+.detail-info .product-price-cover {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-info .product-price-cover .product-price {
+    line-height: 1;
+}
+
+.detail-info .product-price {
+    display: flex;
+    align-items: center;
+    margin: 15px 0px 30px;
+}
+
+.product-price {
+    font-family: Quicksand, sans-serif;
+}
+.clearfix::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.detail-info .product-price .current-price {
+    font-size: 58px;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.text-brand {
+    color: rgb(59, 183, 126) !important;
+}
+
+.clearfix::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.detail-info .product-price .save-price {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+    color: rgb(253, 192, 64);
+}
+
+.detail-info .product-price .old-price {
+    color: rgb(182, 182, 182);
+    margin-left: 20px;
+    font-size: 28px;
+    font-weight: 700;
+    display: block;
+    text-decoration: line-through;
+}
+
+.font-lg {
+    font-size: 17px;
+}
+.list-filter {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+.list-filter li {
+    display: inline-block;
+}
+
+.detail-extralink .detail-qty {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(59, 183, 126);
+    max-width: 90px;
+    margin: 0px 6px 15px 0px;
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 11px 20px 11px 30px;
+    border-width: 2px !important;
+    border-style: solid !important;
+    border-color: rgb(59, 183, 126) !important;
+    border-image: initial !important;
+}
+
+.detail-extralink > div {
+    display: inline-block;
+    vertical-align: top;
+}
+.detail-qty {
+    max-width: 80px;
+    position: relative;
+    width: 100%;
+    padding: 9px 20px;
+    border-radius: 5px;
+}
+.detail-qty > a.qty-down {
+    bottom: -4px;
+}
+
+.detail-qty > a {
+    font-size: 16px;
+    position: absolute;
+    right: 8px;
+    color: rgb(59, 183, 126);
+}
+input.qty-val {
+    height: unset;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 0px;
+    padding: 0px !important;
+}
+.detail-qty > a.qty-up {
+    top: 0px;
+}
+
+.detail-qty > a {
+    font-size: 16px;
+    position: absolute;
+    right: 8px;
+    color: rgb(59, 183, 126);
+}
+.detail-extralink > div {
+    display: inline-block;
+    vertical-align: top;
+}
+.product-extra-link2 .button.button-add-to-cart {
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: Quicksand, sans-serif;
+    padding: 0px 20px;
+    border-radius: 5px;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+}
+
+/* product info component start  */
+.product-info {
+    border: 1px solid #ececec;
+    border-radius: 15px;
+    padding: 40px 50px;
+}
+.nav-tabs {
+    border: 0;
+    margin-bottom: 4px;
+}
+
+.tab-style3 .nav-tabs .nav-item a.active, .tab-style3 .nav-tabs .nav-item a:hover {
+    color: #3BB77E;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+}
+.tab-style3 .nav-tabs li.nav-item a {
+    display: block;
+    padding: 13px 24px !important;
+    text-align: center;
+    font-weight: 700;
+    font-family: "Quicksand", sans-serif;
+    text-transform: none;
+    font-size: 17px;
+    border-radius: 30px;
+    border: 1px solid #ececec;
+    background: #fff;
+    color: #7E7E7E;
+}
+.nav-tabs .nav-link:first-child {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+.nav-tabs .nav-link.active {
+    color: #3BB77E;
+    background-color: #fde1bd;
+}
+
+.tab-content.shop_info_tab {
+    margin-top: 40px;
+}
+
+.tab-content>.active {
+    display: block;
+}
+.tab-content>.tab-pane {
+    display: none;
+}
+.fade {
+    transition: opacity .15s 
+linear;
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 5px;
+    color: #7E7E7E;
+}
+
+.product-more-infor {
+    padding: 0 0 0px 14px;
+}
+hr {
+    margin: 1rem 0;
+    color: inherit;
+    border: 0;
+    border-top: var(--bs-border-width) solid;
+    opacity: .25;
+}
+table td, table th {
+    padding: 10px 20px;
+    border: 1px solid #ececec;
+    vertical-align: middle;
+}
+
+.vendor-logo img {
+    max-width: 150px;
+}
+h6 {
+    font-size: 16px;
+}
+
+.product-rate {
+    background-image: url('https://nest-frontend-v6.vercel.app/assets/imgs/theme/rating-stars.png');
+    background-position: 0 -12px;
+    background-repeat: repeat-x;
+    height: 12px;
+    width: 60px;
+    transition: all 0.5s 
+ease-out 0s;
+    -webkit-transition: all 0.5s 
+ease-out 0s;
+}
+.product-rating {
+    height: 12px;
+    background-repeat: repeat-x;
+    background-image: url('https://nest-frontend-v6.vercel.app/assets/imgs/theme/rating-stars.png');
+    background-position: 0 0;
+}
+
+.contact-infor {
+    font-size: 15px;
+    color: #253D4E;
+}
+.contact-infor li:not(:last-child) {
+    margin-bottom: 10px;
+}
+.contact-infor li img {
+    margin-right: 8px;
+    max-width: 16px;
+}
+
+.tab-pane .comments-area {
+    padding-top: 0;
+    border: 0;
+}
+.comments-area h4 {
+    margin-bottom: 35px;
+    color: #2a2a2a;
+    font-size: 18px;
+}
+.comments-area .comment-list {
+    padding-bottom: 48px;
+}
+.comments-area .comment-list:last-child {
+    padding-bottom: 0px;
+}
+.comments-area .comment-list .single-comment:not(:last-child) {
+    border-bottom: 1px solid #ececec;
+}
+.comments-area .comment-list .single-comment {
+    margin: 0 0 15px 0;
+    border: 1px solid #f2f2f2;
+    border-radius: 15px;
+    padding: 20px;
+    transition: 0.2s;
+}
+.comments-area .thumb {
+    margin-right: 20px;
+}
+.comments-area h4 {
+    margin-bottom: 35px;
+    color: #2a2a2a;
+    font-size: 18px;
+}
+.product-rate {
+    background-image: url('https://nest-frontend-v6.vercel.app/assets/imgs/theme/rating-stars.png');
+    background-position: 0 -12px;
+    background-repeat: repeat-x;
+    height: 12px;
+    width: 60px;
+    transition: all 0.5s 
+ease-out 0s;
+    -webkit-transition: all 0.5s 
+ease-out 0s;
+}
+.progress span {
+    line-height: 16px;
+    background: #fff;
+    padding-right: 10px;
+    width: 45px;
+}
+.progress-bar {
+    background-color: #3BB77E;
+}
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+    white-space: nowrap;
+    transition: var(--bs-progress-bar-transition);
+}
+
+.comment-form {
+    padding-top: 45px;
+    margin-bottom: 20px;
+}
+.comment-form .form-group {
+    margin-bottom: 20px;
+}
+.comment-form textarea {
+    min-height: 200px;
+    padding-top: 15px;
+}
+.form-control {
+    border: 1px solid #f0e9ff;
+    border-radius: 10px;
+    height: 48px;
+    padding-left: 18px;
+    font-size: 16px;
+    background: transparent;
+}
+.form-group input {
+    background: #fff;
+    border: 1px solid #ececec;
+    height: 64px;
+    box-shadow: none;
+    padding-left: 20px;
+    font-size: 16px;
+    width: 100%;
+}

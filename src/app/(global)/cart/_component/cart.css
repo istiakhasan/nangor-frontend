@@ -1,0 +1,93 @@
+.page-header.breadcrumb-wrap {
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ececec;
+    font-family: "Quicksand", sans-serif;
+}
+.breadcrumb {
+    padding: 0;
+    text-transform: capitalize;
+    color: #7E7E7E;
+    font-size: 14px;
+    font-weight: 600;
+    background: none;
+    margin: 0;
+    border-radius: 0;
+}
+.text-body{
+    color: #7E7E7E !important;
+}
+
+.invoice-1 .invoice-info-buttom .table .invoice-1 .invoice-info-buttom .table tr, .table tr {
+    border: 1px solid #e9ecef;
+}
+
+.text-heading {
+    color: #253D4E;
+}
+.text-body {
+    color: #7E7E7E !important;
+}
+h4 {
+    font-size: 24px;
+}
+
+.detail-extralink .detail-qty {
+    margin: 0 6px 15px 0;
+    background: #fff;
+    border: 2px solid #3BB77E !important;
+    font-size: 16px;
+    font-weight: 700;
+    color: #3BB77E;
+    border-radius: 5px;
+    padding: 11px 20px 11px 30px;
+    max-width: 90px;
+}
+.detail-extralink > div {
+    display: inline-block;
+    vertical-align: top;
+}
+.detail-qty {
+    max-width: 80px;
+    padding: 9px 20px;
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+}
+input.qty-val {
+    border: 0;
+    border-radius: 0;
+    height: unset;
+    padding: 0 !important;
+}
+.custom_border {
+    border: 1px solid #ececec !important;
+}
+
+
+.custom_border_table{
+  border-collapse: collapse;
+}
+.custom_border_table table{
+    
+    width: 100%;
+}
+.custom_border_table table tr{
+    border: 1px solid #ececec;
+}
+.custom_border_table table tr td{
+   padding: 10px 5px;
+}
+.custom_border_table table thead th {
+    background-color: #ececec;
+    padding: 18px 0;
+    font-family: "Quicksand", sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #253D4E;
+}
+.custom_border_table table tbody tr img {
+    max-width: 120px;
+    border: 1px solid #ececec;
+    border-radius: 15px;
+}

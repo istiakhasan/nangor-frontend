@@ -1,0 +1,223 @@
+.page-header.breadcrumb-wrap {
+  padding: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ececec;
+  font-family: "Quicksand", sans-serif;
+}
+.breadcrumb {
+  display: inline-block;
+  padding: 0;
+  text-transform: capitalize;
+  color: #7e7e7e;
+  font-size: 14px;
+  font-weight: 600;
+  background: none;
+  margin: 0;
+  border-radius: 0;
+}
+.text-body {
+  color: #7e7e7e !important;
+}
+.toggle_info {
+  padding: 12px 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #ececec;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+}
+.text-muted {
+  color: #b6b6b6 !important;
+}
+.collapse:not(.show) {
+  display: none;
+}
+.login_form .panel-body,
+.coupon_form .panel-body {
+  border: 1px solid #ececec;
+  padding: 30px;
+  margin-top: 30px;
+  border-radius: 10px;
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group input {
+  background: #fff;
+  border: 1px solid #ececec;
+  height: 64px;
+  box-shadow: none;
+  padding-left: 20px;
+  font-size: 16px;
+  width: 100%;
+  outline: none;
+}
+.divider-2 {
+  width: 100%;
+  height: 1px;
+  background-color: #ececec;
+}
+.invoice-1
+  .invoice-info-buttom
+  .table
+  .invoice-1
+  .invoice-info-buttom
+  .table
+  tr,
+.table tr {
+  border: 1px solid #e9ecef;
+}
+.order_table table .product-thumbnail img {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  border: 1px solid #ececec;
+  padding: 5px;
+  object-fit: cover;
+}
+.order_table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order_table table tr {
+  border: 1px solid #e9ecef;
+}
+.order_table table td {
+  padding: 10px; /* keeps spacing inside cells */
+}
+
+.payment_option .custome-radio {
+    margin-bottom: 10px;
+}
+.custome-radio .form-check-input, .custome-checkbox .form-check-input {
+    display: none;
+}
+.form-check-input[type=radio] {
+    border-radius: 50%;
+}
+.form-check-input {
+    --bs-form-check-bg: var(--bs-body-bg);
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: .25em;
+    vertical-align: top;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bs-form-check-bg);
+    background-image: var(--bs-form-check-bg-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+    print-color-adjust: exact;
+}
+.payment_option .custome-radio .form-check-label {
+    color: #292b2c;
+    font-weight: 600;
+}
+.btn, .button {
+    display: inline-block;
+    border: 1px solid transparent;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 30px;
+    border-radius: 4px;
+    color: #fff;
+    border: 1px solid transparent;
+    background-color: #3BB77E;
+    cursor: pointer;
+    transition: all 300ms 
+linear 0s;
+    letter-spacing: 0.5px;
+}
+
+.custome-radio input[type="radio"] {
+  appearance: none;       /* remove default */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #22c55e; /* border color */
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.custome-radio input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 3px;   /* space from top */
+  left: 3px;  /* space from left */
+  width: 8px;
+  height: 8px;
+  background: #22c55e; /* inner dot color */
+  border-radius: 50%;
+}
+
+textarea {
+    border: 1px solid #ececec;
+    border-radius: 10px;
+    height: 50px;
+    box-shadow: none;
+    padding: 10px 10px 10px 20px;
+    font-size: 16px;
+    width: 100%;
+    min-height: 200px;
+}
+textarea:focus {
+    background: transparent;
+    border: 1px solid #BCE3C9;
+}
+
+.form-group input:focus {
+    background: transparent;
+    border-color: #BCE3C9;
+}
+.select2-hidden-accessible {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+    white-space: nowrap !important;
+}
+.custom_select {
+    position: relative;
+    width: 100%;
+}
+
+.apply-coupon {
+    display: flex;
+}
+.apply-coupon input {
+    height: 51px;
+    background-image: url('https://nest-frontend-v6.vercel.app/assets/imgs/theme/icons/coupon.png');
+    background-repeat: no-repeat;
+    padding-left: 50px;
+    border-radius: 10px 0px 0px 10px;
+    background-position: 20px center;
+}
+.apply-coupon button {
+    min-width: 150px;
+    height: 51px;
+    background-color: rgb(37, 61, 78);
+    border-radius: 0px 10px 10px 0px;
+}
+input {
+    border: 1px solid #ececec;
+    border-radius: 10px;
+    height: 64px;
+    box-shadow: none;
+    padding-left: 20px;
+    font-size: 16px;
+    width: 100%;
+    outline: none;
+}
