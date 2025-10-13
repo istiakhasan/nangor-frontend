@@ -26,7 +26,6 @@ async function getProducts({
   if (salesPriceMin != null) url += `&salesPriceMin=${salesPriceMin}`;
   if (salesPriceMax != null) url += `&salesPriceMax=${salesPriceMax}`;
 
-  console.log(url, "url");
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch products");
   return res.json();
@@ -80,7 +79,7 @@ const ProductSection = async ({ searchParams }) => {
   ]);
 
   const css =
-    "hover:text-[#29A56C] hover:cursor-pointer text-[16px] mr-[30px] hover:-translate-y-[3px] transition-transform duration-200";
+    "hover:text-[#4d321d] hover:cursor-pointer text-[16px] mr-[30px] hover:-translate-y-[3px] transition-transform duration-200";
 
   return (
     <div className="p-[20px] md:grid grid-cols-4 gap-5">
@@ -92,7 +91,7 @@ const ProductSection = async ({ searchParams }) => {
               <Link
                 href="/"
                 className={`${
-                  !categoryId ? "text-[#29A56C]" : "text-[#253D4E]"
+                  !categoryId ? "text-[#4d321d]" : "text-[#253D4E]"
                 } ${css}`}
               >
                 All
@@ -120,7 +119,7 @@ const ProductSection = async ({ searchParams }) => {
                     href={`/?${queryString}`}
                     className={`${
                       categoryId == item.value
-                        ? "text-[#29A56C]"
+                        ? "text-[#4d321d]"
                         : "text-[#253D4E]"
                     } ${css}`}
                   >

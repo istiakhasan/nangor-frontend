@@ -16,7 +16,7 @@ const CartPage = () => {
   const dispatch = useDispatch();
   const router=useRouter()
   return (
-    <main className="main p-[20px]">
+    <main className="main md:p-[20px]">
       {/* Breadcrumb */}
       <div className="page-header breadcrumb-wrap">
         <div className=" mx-auto ">
@@ -54,20 +54,18 @@ const CartPage = () => {
         </div>
 
         {/* Cart Table */}
-        <div className="grid grid-cols-3 gap-6">
+        <div className="md:grid grid-cols-3 gap-6">
           <div className="col-span-2">
             <div className="custom_border_table">
               <table className="w-full table-auto border-collapse border-spacing-5">
                 <thead>
                   <tr className="bg-gray-100">
-                    <th className="pl-8">
-                      <input type="checkbox" className="form-check-input" />
-                    </th>
-                    <th colSpan="2" className="text-left">Product</th>
-                    <th className="text-left">Unit Price</th>
-                    <th className="text-center">Quantity</th>
-                    <th className="text-left">Subtotal</th>
-                    <th className="text-center">Remove</th>
+                    <th style={{fontSize:"10px"}} className="pl-8"><input type="checkbox" className="form-check-input" /></th>
+                    <th style={{fontSize:"10px"}} colSpan="2" className="text-left">Product</th>
+                    <th style={{fontSize:"10px"}} className="text-left">Unit Price</th>
+                    <th style={{fontSize:"10px"}} className="text-center">Quantity</th>
+                    <th style={{fontSize:"10px"}} className="text-left">Subtotal</th>
+                    <th style={{fontSize:"10px"}} className="text-center">Remove</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -80,7 +78,7 @@ const CartPage = () => {
                         <img
                           src={product.images[0]?.url}
                           alt={product?.name}
-                          className="w-20 h-20 object-cover"
+                          className="md:w-20 w-[30px] h-[30px] md:h-20 object-cover"
                         />
                       </td>
                       <td>
@@ -105,7 +103,7 @@ const CartPage = () => {
                               })
                             )
                           }
-                          className="border border-[#29A56C] w-[60px] px-[10px] py-2 rounded-[4px] outline-0 "
+                          className="border border-[#4d321d] w-[60px] px-[10px] py-2 rounded-[4px] outline-0 "
                           type="number"
                         />
                       </td>

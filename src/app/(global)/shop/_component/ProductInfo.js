@@ -3,19 +3,19 @@
 import React, { useState } from "react";
 import ReviewsTab from './ReviewsTab';
 
-const ProductInfo = () => {
+const ProductInfo = ({product}) => {
   const [activeTab, setActiveTab] = useState("Description");
 
   const tabs = [
     { id: "Description", label: "Description" },
-    { id: "Additional-info", label: "Additional info" },
-    { id: "Vendor-info", label: "Author" },
+    // { id: "Additional-info", label: "Additional info" },
+    // { id: "Vendor-info", label: "Author" },
     // { id: "Reviews", label: "Reviews (3)" },
   ];
 
   return (
-    <div className="product-info">
-      <div className="tab-style3">
+  
+      <div>
         {/* --- Tabs --- */}
         <ul className="flex flex-wrap border-b border-gray-300 text-sm font-semibold uppercase nav nav-tabs text-uppercase">
           {tabs.map((tab) => (
@@ -38,54 +38,8 @@ const ProductInfo = () => {
         <div className="tab-content mt-6">
           {/* Description */}
           {activeTab === "Description" && (
-            <div id="Description" className="leading-relaxed text-gray-700">
-              <p>
-                Uninhibited carnally hired played in whimpered dear gorilla
-                koala depending and much yikes off far quetzal goodness...
-              </p>
-              <p className="mt-3">
-                Spluttered narrowly yikes left moth in yikes bowed this that
-                grizzly much hello on spoon-fed that alas rethought much...
-              </p>
-              <ul className="product-more-infor mt-6 space-y-1">
-                <li>
-                  <span>Type Of Packing</span> Bottle
-                </li>
-                <li>
-                  <span>Color</span> Green, Pink, Powder Blue, Purple
-                </li>
-                <li>
-                  <span>Quantity Per Case</span> 100ml
-                </li>
-                <li>
-                  <span>Ethyl Alcohol</span> 70%
-                </li>
-                <li>
-                  <span>Piece In One</span> Carton
-                </li>
-              </ul>
-              <hr className="my-6 border-dotted" />
-              <h4 className="mt-8 font-bold">Packaging &amp; Delivery</h4>
-              <p className="mt-2">
-                Less lion goodness that euphemistically robin expeditiously
-                bluebird smugly scratched far while thus cackled sheepishly...
-              </p>
-              <h4 className="mt-8 font-bold">Suggested Use</h4>
-              <ul className="product-more-infor mt-3 list-disc ml-5">
-                <li>Refrigeration not necessary.</li>
-                <li>Stir before serving</li>
-              </ul>
-              <h4 className="mt-8 font-bold">Other Ingredients</h4>
-              <ul className="product-more-infor mt-3 list-disc ml-5">
-                <li>Organic raw pecans, organic raw cashews.</li>
-                <li>Produced using Low Temperature Grinding process.</li>
-              </ul>
-              <h4 className="mt-8 font-bold">Warnings</h4>
-              <ul className="product-more-infor mt-3 list-disc ml-5">
-                <li>
-                  Oil separation occurs naturally. May contain pieces of shell.
-                </li>
-              </ul>
+            <div id="Description" className="leading-relaxed text-gray-700"  dangerouslySetInnerHTML={{ __html: product?.htmldescription }}>
+
             </div>
           )}
 
@@ -179,7 +133,7 @@ const ProductInfo = () => {
           )}
         </div>
       </div>
-    </div>
+   
   );
 };
 

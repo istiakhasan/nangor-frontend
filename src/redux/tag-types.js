@@ -22,4 +22,5 @@
       "deliveryPartner",
       "dashboard",
       "order",
+      "author",
   ];

@@ -72,7 +72,7 @@ const TopSearchBar = () => {
       />
 
       {/* Search bar */}
-      <div className="border-[2px] hidden border-[#3BB77E] flex-1 mx-8 md:flex items-center px-4 relative">
+      <div className="border-[2px] hidden border-[#4d321d] flex-1 mx-8 md:flex items-center px-4 relative">
         <div className="w-[150px] border-r " ref={dropdownRef}>
           <div
             onClick={() => setCategoryOpen(!categoryOpen)}
@@ -87,7 +87,7 @@ const TopSearchBar = () => {
             >
               <input
                 type="text"
-                className="border-[#3BB77E] border-[1px] w-full py-3 rounded-[5px] outline-none px-[15px]"
+                className="border-[#4d321d] border-[1px] w-full py-3 rounded-[5px] outline-none px-[15px]"
                 placeholder="Search category..."
               />
               <ul className="mt-3 overflow-auto h-[200px]">
@@ -95,7 +95,7 @@ const TopSearchBar = () => {
                   <li
                     key={i}
                     onClick={() => handleCategoryClick(cat)}
-                    className="py-3 hover:text-white cursor-pointer hover:bg-[#3BB77E] mb-[1px] px-2"
+                    className="py-3 hover:text-white cursor-pointer hover:bg-[#4d321d] mb-[1px] px-2"
                   >
                     {cat?.label}
                   </li>
@@ -118,7 +118,7 @@ const TopSearchBar = () => {
         <div className="relative cart_icon">
           <i className="ri-shopping-cart-2-line text-[34px]"></i> <span className="hidden md:inline">Cart</span>
           <span
-            className="absolute left-[22px] top-[5px] bg-[#55b477] rounded-full text-white flex items-center justify-center"
+            className="absolute left-[22px] top-[5px] bg-[#4d321d] rounded-full text-white flex items-center justify-center"
             style={{
               width: `${Math.max(20, String(cartItems?.cart?.length).length * 10)}px`,
               height: `${Math.max(20, String(cartItems?.cart?.length).length * 10)}px`,

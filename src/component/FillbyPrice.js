@@ -95,7 +95,7 @@ const FillByPrice = ({ page }) => {
                     height: "100%",
                     left: `${(values[0] / MAX) * 100}%`,
                     width: `${((values[1] - values[0]) / MAX) * 100}%`,
-                    backgroundColor: "#3BB77E",
+                    backgroundColor: "#4d321d",
                     borderRadius: "3px",
                   }}
                 />
@@ -115,7 +115,7 @@ const FillByPrice = ({ page }) => {
                   height: "18px",
                   width: "18px",
                   borderRadius: "50%",
-                  backgroundColor: "#3BB77E",
+                  backgroundColor: "#4d321d",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
@@ -128,10 +128,10 @@ const FillByPrice = ({ page }) => {
 
         <div className="flex justify-between mt-[15px]">
           <label>
-            From: <span className="text-[#3BB77E]">${values[0]}</span>
+            From: <span className="text-[#4d321d]">${values[0]}</span>
           </label>
           <label>
-            To: <span className="text-[#3BB77E]">${values[1]}</span>
+            To: <span className="text-[#4d321d]">${values[1]}</span>
           </label>
         </div>
 

@@ -9,11 +9,15 @@ import { Button } from "@mui/material";
 import { uploadImageToImagebb } from "../../../../../utils/util";
 import { useCreateSimpleProductMutation } from "../../../../../redux/api/productApi";
 import { useGetAllMainCategoryQuery } from "../../../../../redux/api/categoryApi";
+import { useGetAuthorApiOptionsQuery } from "@/redux/api/authorApi";
+import MaterialRichEditor from "@/component/MaterialRichEditor";
+import { useFormContext } from "react-hook-form";
 
 const AddProduct = ({setOpen}) => {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [createProduct] = useCreateSimpleProductMutation();
   const { data: categoryData } = useGetAllMainCategoryQuery(undefined);
+  const { data: authorOptions } = useGetAuthorApiOptionsQuery(undefined);
   const handleSubmit = async (data, reset) => {
     try {
       setSubmitLoading(true);
@@ -28,14 +32,16 @@ const AddProduct = ({setOpen}) => {
         return uploadedImages;
       };
 
-      const { categoryId,badge, unit, images, ...rest } = data;
+      const { categoryId,badge,author, unit, images, ...rest } = data;
       const payload = { ...rest };
       payload["categoryId"] = categoryId;
       payload["unit"] = unit;
       payload["images"] = await mapImages(data.images || []);
       payload["productType"] = "Simple product";
       payload["isBaseProduct"] = false;
+      payload["authorId"] = author;
       payload["badge"] = badge;
+
       const res = await createProduct(payload).unwrap();
 
       if (!!res?.success) {
@@ -57,6 +63,8 @@ const AddProduct = ({setOpen}) => {
       setSubmitLoading(false);
     }
   };
+
+  console.log(authorOptions,'author api ')
   return (
     <div className="p-6 bg-gray-50">
       <h2 className="text-2xl font-semibold text-gray-700 mb-6">
@@ -127,6 +135,17 @@ const AddProduct = ({setOpen}) => {
           </div>
           <div className="mb-4">
             <NgSelect
+              name="author"
+              label="Author"
+              placeholder="Select Author"
+              options={authorOptions?.map((item) => ({
+                label: item?.label,
+                value: item?.value,
+              }))}
+            />
+          </div>
+          <div className="mb-4">
+            <NgSelect
               name="badge"
               label="Badge"
               placeholder="Select Category"
@@ -158,6 +177,12 @@ const AddProduct = ({setOpen}) => {
 
         {/* Image Upload */}
         <div className="mb-6">
+
+
+   <Editor />
+
+        </div>
+        <div className="mb-6">
           <NgFileUpload
             name="images"
             label="Product Images"
@@ -179,3 +204,13 @@ const AddProduct = ({setOpen}) => {
 };
 
 export default AddProduct;
+
+
+
+const  Editor = () => {
+  const {setValue}=useFormContext()
+  return (
+    <MaterialRichEditor  value={null} onChange={(e)=>setValue('htmldescription',e)} />
+  );
+};
+

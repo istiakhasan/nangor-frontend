@@ -16,7 +16,7 @@ const ProductSection = ({ title, products }) => (
         </div>
         <div className="content">
           <h5>
-            <a className="hover:text-[#3BB77E]" href="shop-product-detail.html">
+            <a className="hover:text-[#4d321d]" href="shop-product-detail.html">
               {item.name}
             </a>
           </h5>

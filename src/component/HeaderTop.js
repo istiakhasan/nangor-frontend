@@ -75,7 +75,7 @@ const HeaderTop = () => {
             <ul className="flex gap-3">
               <li>
                 Need help? Call Us:
-                <strong className="text-brand text-[#3bb77e]"> + 1800 900</strong>
+                <strong className="text-brand text-[#4d321d]"> + 1800 900</strong>
               </li>
               <Dropdown options={languageOptions} defaultValue="en" />
               <Dropdown options={currencyOptions} defaultValue="usd" />

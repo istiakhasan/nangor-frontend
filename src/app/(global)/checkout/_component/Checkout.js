@@ -58,8 +58,6 @@ export default function Checkout() {
   const onSubmit = async (data) => {
     try {
       const res = await orderCreateHandler(data).unwrap();
-      console.log(res, "res");
-
       if (!!res) {
         setSnackbarOpen(true);
         setIsModalOpen(true);
@@ -117,13 +115,13 @@ console.log(cartItems,"cartitems");
 
       {/* Main Container */}
       <div className="mb-[80px] mt-[50px]">
-        <div className="grid grid-cols-12">
+        <div className=" grid md:grid-cols-12">
           {/* Left Column */}
-          <div className="col-span-7 border border-gray-200 p-[40px]">
+          <div className="col-span-7 md:order-1 order-2 md:mb-0 mb-3 border border-gray-200 p-[40px]">
             <div className="grid">
               <h4 className="mb-[30px]">Billing Details</h4>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid grid-cols-12 gap-6">
+                <div className="md:grid grid-cols-12 gap-6">
                   <div className="form-group col-span-6">
                     <input
                       type="text"
@@ -157,7 +155,7 @@ console.log(cartItems,"cartitems");
                   )}
                 </div>
 
-                <div className="grid grid-cols-3 gap-6 shipping_calculator">
+                <div className="md:grid grid-cols-3 gap-6 shipping_calculator">
                   <div className="form-group">
                     <input
                       type="text"
@@ -229,28 +227,27 @@ console.log(cartItems,"cartitems");
           </div>
 
           {/* Right Column */}
-          <div className="col-span-5">
-            <div className="border border-gray-200 p-[40px] cart-totals ml-[30px]">
+          <div className="col-span-5 md:order-2 order-1">
+            <div className="border border-gray-200 md:p-[40px] p-[10px] cart-totals md:ml-[30px]">
               <div className="flex align-items-end justify-between mb-[30px]">
                 <h4 className="text-[24px]">Your Order</h4>
                 <h6 className="text-muted">Subtotal</h6>
               </div>
               <div className="divider-2 "></div>
-              <div className="table-responsive order_table checkout h-[600px] overflow-y-scroll">
+              <div className="table-responsive order_table checkout max-h-[600px] overflow-y-scroll">
                 <table>
                   <tbody>
                     {cartItems?.cart?.map((a, i) => (
                       <tr key={i}>
                         <td className="image product-thumbnail">
                           <img
-                            height={200}
-                            width={200}
+                            className="md:h-[200px] md:w-[200px] h-[40px] w-[40px]"
                             src={a?.images[0]?.url}
                             alt="#"
                           />
                         </td>
                         <td>
-                          <h6 className="w-[160px] mb-[5px]">
+                          <h6 className="md:w-[160px] mb-[5px]">
                             <Link
                               href="/shop-product-full"
                               className="text-heading"

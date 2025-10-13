@@ -60,7 +60,7 @@ export default function BannerCarousel() {
                   />
                   <button
                     type="submit"
-                    className="bg-green-500 hover:bg-green-600 text-white px-6 py-4 font-medium"
+                    className="bg-[#4d321d] hover:bg-green-600 text-white px-6 py-4 font-medium"
                   >
                     Subscribe
                   </button>

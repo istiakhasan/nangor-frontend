@@ -15,10 +15,17 @@ async function getProducts({
   limit,
   categoryId,
   searchTerm,
+  authorIds,
   salesPriceMin,
   salesPriceMax,
 }) {
+
   let url = `${getBaseUrl()}/products?limit=${limit}&page=${page}`;
+   if (authorIds?.length > 0) {
+    authorIds.forEach((id) => {
+      url += `&authorIds=${id}`; // send each ID separately
+    });
+  }
   if (categoryId) url += `&categoryId=${categoryId}`;
   if (searchTerm) url += `&searchTerm=${searchTerm}`;
   if (salesPriceMin != null) url += `&salesPriceMin=${salesPriceMin}`;
@@ -39,8 +46,8 @@ async function getCategories() {
 
 const ShopProductSection = async ({ searchParams }) => {
   const page = parseInt(searchParams?.page || "1", 10);
-  const limit = 5;
-
+  const limit = 15;
+const resolvedSearchParams = await searchParams;
   const categoryId =
     searchParams?.categoryId && searchParams.categoryId !== "undefined"
       ? searchParams.categoryId
@@ -58,17 +65,25 @@ const ShopProductSection = async ({ searchParams }) => {
   const salesPriceMax = searchParams?.salesPriceMax
     ? Number(searchParams.salesPriceMax)
     : null;
-
+    let authorIds = [];
+  if (resolvedSearchParams?.authorIds) {
+     const mdar=resolvedSearchParams?.authorIds?.split(',')
+     if(mdar?.length>0){
+      authorIds=mdar
+     }else{
+      authorIds=[resolvedSearchParams?.authorIds]
+     }
+  }
   // fetch products and categories in parallel
   const [products, categories] = await Promise.all([
-    getProducts({ page, limit, categoryId, searchTerm, salesPriceMin, salesPriceMax }),
+    getProducts({ page, limit, categoryId, searchTerm,authorIds, salesPriceMin, salesPriceMax }),
     getCategories(),
   ]);
 
   const totalPages = Math.ceil(products?.meta?.total / limit);
 
   return (
-    <div className="p-[20px] grid grid-cols-5 gap-5">
+    <div className="p-[20px] md:grid grid-cols-5 gap-5">
       <div className="col-span-4">
         <div className="shop-product-fillter">
           <div className="totall-product">
@@ -79,13 +94,13 @@ const ShopProductSection = async ({ searchParams }) => {
           <SortDropdown />
         </div>
 
-        <div className="grid grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {products?.data?.map((item, index) => (
             <ProductCard key={item.id} item={item} index={index} />
           ))}
 
           {/* Pagination */}
-          <div className="col-span-5">
+          <div className="md:col-span-5">
             <Pagination
               totalPages={totalPages}
               currentPage={page}

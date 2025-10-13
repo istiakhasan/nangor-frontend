@@ -57,11 +57,11 @@ const Pagination = ({ totalPages = 1, currentPage = 1, basePath = "/" }) => {
             ) : (
               <li key={idx}>
                 <Link
-                 style={Number(page) === activePage? {background:"#3BB77E",color:"white"}:{}}
+                 style={Number(page) === activePage? {background:"#4d321d",color:"white"}:{}}
                   href={`${basePath}?page=${page}`}
                   className={`page-link flex items-center justify-center w-8 h-8 border rounded hover:bg-gray-100 ${
                     Number(page) === activePage
-                      ? "bg-green-500 text-white border-green-500"
+                      ? "bg-[#4d321d] text-white border-green-500"
                       : "bg-white text-black"
                   }`}
                 >

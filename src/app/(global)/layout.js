@@ -9,7 +9,9 @@ const GlobalLayout = ({ children }) => {
   return (
    <Suspense fallback={<div>Loading cart...</div>}>
       <div className="">
-        <HeaderTop />
+        <div className="hidden md:block">
+          <HeaderTop />
+        </div>
         <TopSearchBar />
         <MenuBar />
         {children}

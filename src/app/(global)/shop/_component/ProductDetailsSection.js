@@ -44,7 +44,7 @@ const ProductDetailsSection = () => {
       {
         breakpoint: 640, // mobile
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
@@ -52,7 +52,7 @@ const ProductDetailsSection = () => {
   };
   if (isLoading) return;
   return (
-    <section className="grid grid-cols-12 gap-[30px]  px-0 pt-5 mx-auto pb-5">
+    <section className="md:grid grid-cols-12 gap-[30px]  px-0 pt-5 mx-auto pb-5">
       <div className="col-span-6 px-4">
         <ProductImageSlider
           images={data?.data?.data?.images?.map((item) => {
@@ -64,8 +64,8 @@ const ProductDetailsSection = () => {
         />
       </div>
       <ProductDetails product={data?.data?.data} />
-      <div className="col-span-12">
-        <ProductInfo />
+      <div className="col-span-12 ">
+        <ProductInfo product={data?.data?.data} />
       </div>
       <div className="col-span-12">
         <div className="relative w-full mb-10 p-[20px]">

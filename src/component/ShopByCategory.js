@@ -52,9 +52,9 @@ const CategorySlider = () => {
         {categoryData?.data?.map((cat) => (
           <div key={cat.id} className="px-4">
             <div className="flex sop_category_slider_card flex-col items-center justify-center h-[180px] bg-gray-50 rounded-2xl shadow-sm hover:shadow-md cursor-pointer">
-              <img src={'https://nest-frontend-v6.vercel.app/assets/imgs/theme/icons/category-11.svg'} alt={cat.name} className="w-16 h-16 mb-4" />
+              <img src={'https://nest-frontend-v6.vercel.app/assets/imgs/theme/icons/category-11.svg'} alt={cat?.label} className="w-16 h-16 mb-4" />
               <p className=" font-medium text-center">
-                {cat.name}
+                {cat?.label}
               </p>
             </div>
           </div>

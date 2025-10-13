@@ -33,7 +33,7 @@ export const cartSlice = createSlice({
       if (isExist) {
         // message.error("Already added");
       } else {
-        state.cart.push({...payload,quantity:1});
+        state.cart.push({...payload,quantity:payload?.quantity?payload?.quantity:1});
         updateTotalAndShipping(state);
         // toast.success("Product added successfully...");
       }

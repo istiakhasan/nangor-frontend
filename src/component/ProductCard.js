@@ -11,9 +11,9 @@ export default function ProductCard({ item,index }) {
     new: "bg-green-500 text-white",
     best: "bg-purple-500 text-white",
   };
-
+console.log(item,"item");
   return (
-    <div className="product-cart-wrap mb-6 h-full flex flex-col">
+    <div className="product-cart-wrap mb-6 h-full flex flex-col duration-300 hover:-translate-y-1 hover:scale-[1.02]">
       {/* Product Image & Actions */}
       <div className="product-img-action-wrap relative group">
         <div className="product-img product-img-zoom overflow-hidden py-5">

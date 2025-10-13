@@ -185,7 +185,7 @@ input.qty-val {
 }
 
 .tab-style3 .nav-tabs .nav-item a.active, .tab-style3 .nav-tabs .nav-item a:hover {
-    color: #3BB77E;
+    color: #4d321d;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
 }
 .tab-style3 .nav-tabs li.nav-item a {
@@ -207,7 +207,7 @@ input.qty-val {
 }
 
 .nav-tabs .nav-link.active {
-    color: #3BB77E;
+    color: #4d321d;
     background-color: #fde1bd;
 }
 
@@ -338,7 +338,7 @@ ease-out 0s;
     width: 45px;
 }
 .progress-bar {
-    background-color: #3BB77E;
+    background-color: #4d321d;
 }
 .progress-bar {
     display: flex;
