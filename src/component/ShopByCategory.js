@@ -30,7 +30,7 @@ const CategorySlider = () => {
       {
         breakpoint: 640, // mobile
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
@@ -59,6 +59,7 @@ const CategorySlider = () => {
             </div>
           </div>
         ))}
+ 
       </Slider>
     </div>
   );

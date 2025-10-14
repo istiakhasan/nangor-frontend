@@ -131,7 +131,7 @@ const ProductSection = async ({ searchParams }) => {
           </ul>
         </div>
 
-        <div className="grid md:grid-cols-5 grid-cols-1 gap-3">
+        <div className="grid md:grid-cols-5 grid-cols-2 gap-3 mb-4">
           {products?.data?.map((item, index) => (
             <ProductCard key={item.id} item={item} index={index} />
           ))}

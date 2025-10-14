@@ -9,10 +9,28 @@ export const authorApi = baseApi.injectEndpoints({
         params: arg
       }),
       providesTags: ['author'],
-    })
+    }),
+    createAuthor: build.mutation({
+      query: (data) => ({
+        url: "/authors",
+        method: "POST",
+        data
+      }),
+      invalidatesTags: ['author'],
+    }),
+    getAllAuthor: build.query({
+      query: (arg) => ({
+        url: "/authors",
+        method: "GET",
+        params: arg
+      }),
+      providesTags: ['author'],
+    }),
   }),
 });
 
 export const {
-  useGetAuthorApiOptionsQuery
+  useGetAuthorApiOptionsQuery,
+  useGetAllAuthorQuery,
+  useCreateAuthorMutation
 } = authorApi;

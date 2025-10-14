@@ -24,11 +24,13 @@
 
 .image-gallery-image-wrapper img {
   width: 100%;
-  max-height: 360px; /* 👈 Reduced from full height */
-  object-fit: contain;
-  border-radius: 12px;
+  height: auto;
+  max-height: 350px; /* remove height restriction */
+  object-fit: cover; /* ensures full width coverage */
+  border-radius: 0; /* optional: make it edge-to-edge */
   transition: transform 0.3s ease-in-out;
 }
+
 
 .image-gallery-image-wrapper img.zoomed {
   transform: scale(1.5);
@@ -93,4 +95,8 @@
 .image-gallery-thumbnail:hover {
   transform: scale(1.05);
   border: 2px solid #1e90ff;
+}
+.image-gallery-thumbnail .image-gallery-thumbnail-image {
+  height: 100px;
+  object-fit: cover;
 }

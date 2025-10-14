@@ -211,7 +211,7 @@ textarea:focus {
     background-color: rgb(37, 61, 78);
     border-radius: 0px 10px 10px 0px;
 }
-input {
+/* input {
     border: 1px solid #ececec;
     border-radius: 10px;
     height: 64px;
@@ -220,4 +220,4 @@ input {
     font-size: 16px;
     width: 100%;
     outline: none;
-}
+} */

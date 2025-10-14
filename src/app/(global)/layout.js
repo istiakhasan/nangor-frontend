@@ -4,6 +4,7 @@ import HeaderTop from "../../component/HeaderTop";
 import MenuBar from "../../component/MenuBar";
 import SubscriptionSection from "../../component/SubscriptionSection";
 import TopSearchBar from "../../component/TopSearchBar";
+import BottomMenuBar from "../../component/BottomMenuBar";
 
 const GlobalLayout = ({ children }) => {
   return (
@@ -18,6 +19,7 @@ const GlobalLayout = ({ children }) => {
         <SubscriptionSection />
         <Footer />
       </div>
+      <BottomMenuBar />
     </Suspense>
   );
 };

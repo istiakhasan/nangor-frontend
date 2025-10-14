@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useGetCategoryOptionsQuery } from "../redux/api/categoryApi";
 import { useSelector } from "react-redux";
+import Nonggor from '../assets/nonggor.png'
 const TopSearchBar = () => {
   const [categoryOpen, setCategoryOpen] = useState(false);
   const pathName=usePathname()
@@ -62,18 +63,18 @@ const TopSearchBar = () => {
   return (
     <div
       style={{ borderBottom: "1px solid rgba(0,0,0,.1)",position:'sticky',top:0,background:"white",zIndex:'1000' }}
-      className="flex justify-between items-center py-4 px-4"
+      className="md:flex justify-between items-center py-4 px-4"
     >
       {/* Logo */}
       <img
-        className="w-[100px] md:w-auto"
-        src="https://nest-frontend-v6.vercel.app/assets/imgs/theme/logo.svg"
+        className="w-[100px] mx-auto"
+        src={'https://i.ibb.co.com/5ggRm6QC/nonggor.png'}
         alt="Logo"
       />
 
       {/* Search bar */}
-      <div className="border-[2px] hidden border-[#4d321d] flex-1 mx-8 md:flex items-center px-4 relative">
-        <div className="w-[150px] border-r " ref={dropdownRef}>
+      <div className="border-[2px] mt-3  border-[#4d321d] flex-1 md:mx-8 flex items-center px-4 relative">
+        <div className="md:w-[150px] w-[100px] border-r " ref={dropdownRef}>
           <div
             onClick={() => setCategoryOpen(!categoryOpen)}
             className="text-[#253D4E] font-semibold text-[15px] cursor-pointer"
@@ -113,7 +114,7 @@ const TopSearchBar = () => {
       </div>
 
       {/* Cart + Account */}
-      <div className="text-[16px] flex gap-5">
+      <div className="text-[16px] hidden md:flex gap-5">
         {/* Cart */}
         <div className="relative cart_icon">
           <i className="ri-shopping-cart-2-line text-[34px]"></i> <span className="hidden md:inline">Cart</span>

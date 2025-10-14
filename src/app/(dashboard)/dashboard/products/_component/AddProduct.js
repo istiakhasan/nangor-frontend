@@ -13,7 +13,7 @@ import { useGetAuthorApiOptionsQuery } from "@/redux/api/authorApi";
 import MaterialRichEditor from "@/component/MaterialRichEditor";
 import { useFormContext } from "react-hook-form";
 
-const AddProduct = ({setOpen}) => {
+const AddProduct = ({ setOpen }) => {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [createProduct] = useCreateSimpleProductMutation();
   const { data: categoryData } = useGetAllMainCategoryQuery(undefined);
@@ -32,11 +32,12 @@ const AddProduct = ({setOpen}) => {
         return uploadedImages;
       };
 
-      const { categoryId,badge,author, unit, images, ...rest } = data;
+      const { categoryId, badge, author, unit, images, ...rest } = data;
       const payload = { ...rest };
       payload["categoryId"] = categoryId;
       payload["unit"] = unit;
       payload["images"] = await mapImages(data.images || []);
+      payload["readMOreImages"] = (await mapImages(data.readMOreImages || []))?.map(item=>item?.url);
       payload["productType"] = "Simple product";
       payload["isBaseProduct"] = false;
       payload["authorId"] = author;
@@ -64,7 +65,7 @@ const AddProduct = ({setOpen}) => {
     }
   };
 
-  console.log(authorOptions,'author api ')
+  console.log(authorOptions, "author api ");
   return (
     <div className="p-6 bg-gray-50">
       <h2 className="text-2xl font-semibold text-gray-700 mb-6">
@@ -151,24 +152,24 @@ const AddProduct = ({setOpen}) => {
               placeholder="Select Category"
               options={[
                 {
-                  label:'New',
-                  value:'New'
+                  label: "New",
+                  value: "New",
                 },
                 {
-                  label:'Hot',
-                  value:'Hot'
+                  label: "Hot",
+                  value: "Hot",
                 },
                 {
-                  label:'Sale',
-                  value:'Sale'
+                  label: "Sale",
+                  value: "Sale",
                 },
                 {
-                  label:'Trending',
-                  value:'Trending'
+                  label: "Trending",
+                  value: "Trending",
                 },
                 {
-                  label:'Top',
-                  value:'Top'
+                  label: "Top",
+                  value: "Top",
                 },
               ]}
             />
@@ -177,15 +178,20 @@ const AddProduct = ({setOpen}) => {
 
         {/* Image Upload */}
         <div className="mb-6">
-
-
-   <Editor />
-
+          <Editor />
         </div>
         <div className="mb-6">
           <NgFileUpload
             name="images"
             label="Product Images"
+            multiple
+            accept="image/*"
+          />
+        </div>
+        <div className="mb-6">
+          <NgFileUpload
+            name="readMOreImages"
+            label="একটু পড়ে দেখুন"
             multiple
             accept="image/*"
           />
@@ -205,12 +211,12 @@ const AddProduct = ({setOpen}) => {
 
 export default AddProduct;
 
-
-
-const  Editor = () => {
-  const {setValue}=useFormContext()
+const Editor = () => {
+  const { setValue } = useFormContext();
   return (
-    <MaterialRichEditor  value={null} onChange={(e)=>setValue('htmldescription',e)} />
+    <MaterialRichEditor
+      value={null}
+      onChange={(e) => setValue("htmldescription", e)}
+    />
   );
 };
-

@@ -121,7 +121,7 @@ const Footer = () => {
                 <div className="logo mb-6">
                   <a className="mb-4 inline-block">
                     <Image
-                      src="https://nest-frontend-v6.vercel.app/assets/imgs/theme/logo.svg"
+                      src="https://i.ibb.co.com/5ggRm6QC/nonggor.png"
                       alt="logo"
                       width={150}
                       height={50}

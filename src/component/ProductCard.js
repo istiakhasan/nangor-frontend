@@ -13,26 +13,20 @@ export default function ProductCard({ item,index }) {
   };
 console.log(item,"item");
   return (
-    <div className="product-cart-wrap mb-6 h-full flex flex-col duration-300 hover:-translate-y-1 hover:scale-[1.02]">
+    <div className="product-cart-wrap md:mb-6 h-full flex flex-col duration-300 hover:-translate-y-1 hover:scale-[1.02]">
       {/* Product Image & Actions */}
       <div className="product-img-action-wrap relative group">
-        <div className="product-img product-img-zoom overflow-hidden py-5">
+        <div className="product-img product-img-zoom overflow-hidden  md:py-5">
           <Link href={`/shop/${item?.id}`}>
-            <Image
-              unoptimized
+            <img
               src={item?.images[0]?.url}
               alt={item?.name || "Product"}
-              width={300}
-              height={300}
-              className="default-img w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+              className="default-img w-full h-[100px] md:h-64 object-cover transition-transform duration-300 group-hover:scale-105"
             />
-            <Image
-              unoptimized
+            <img
               src="https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/0f35a4098_179691.jpg"
               alt={`${item?.name} Hover`}
-              width={300}
-              height={300}
-              className="hover-img w-full h-64 object-cover absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              className="hover-img w-full h-[100px] md:h-64 object-cover absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             />
           </Link>
         </div>
@@ -63,7 +57,7 @@ console.log(item,"item");
 
         {/* Badge */}
         {item?.badge && (
-          <div className="product-badges absolute top-3 left-3">
+          <div className="product-badges absolute top-0 left-3">
             <span
               className={`text-xs font-semibold px-2 py-1 rounded ${
                 badgeStyles[item?.badge?.toLowerCase()] ||
@@ -77,19 +71,19 @@ console.log(item,"item");
       </div>
 
       {/* Product Content */}
-      <div className="product-content-wrap p-4 flex flex-col justify-between flex-1">
+      <div className="product-content-wrap px-[10px]  md:px-[20px] py-[20px] mt-3 md:mt-0 flex flex-col justify-between md:flex-1">
         <div>
           <div className="product-category text-sm text-gray-500">
             <Link href="/shop-grid-right">{item?.category?.label}</Link>
           </div>
 
           {/* Product Title with fixed height */}
-          <h2 className="text-lg font-semibold text-gray-800 mt-1 line-clamp-2 min-h-[3.5rem]">
+          <h2 className="text-[14px] md:text-[16px] font-semibold text-gray-800 mt-1">
             <Link href="/shop-product-right">{item?.name}</Link>
           </h2>
 
           {/* Rating */}
-          <div className="product-rate-cover flex items-center mt-2">
+          {/* <div className="product-rate-cover flex items-center md:mt-2">
             <div>
               <i className="ri-star-fill text-amber-500"></i>
               <i className="ri-star-fill text-amber-500"></i>
@@ -97,7 +91,7 @@ console.log(item,"item");
               <i className="ri-star-fill text-amber-500"></i>
             </div>
             <span className="ml-2 font-small text-xs text-gray-500">(4.0)</span>
-          </div>
+          </div> */}
 
           <div className="text-xs text-gray-500 mt-1">
             By{" "}
@@ -111,7 +105,7 @@ console.log(item,"item");
         </div>
 
         {/* Price & Add to Cart */}
-        <div className="product-card-bottom flex items-end justify-between mt-3">
+        <div className="product-card-bottom md:flex items-end justify-between mt-0 md:mt-3">
           <div className="product-price flex flex-col">
                {item?.regularPrice && (
               <span className="old-price line-through text-gray-400 ml-2 whitespace-nowrap">

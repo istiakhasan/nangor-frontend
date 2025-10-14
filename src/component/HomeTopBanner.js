@@ -38,10 +38,10 @@ export default function BannerCarousel() {
       >
         {banners.map((banner) => (
           <SwiperSlide key={banner.id}>
-            <div className="relative h-[500px]">
+            <div className="relative h-[200px] md:h-[400px]">
               {/* Text section */}
               <div className="text-center md:text-left max-w-xl absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <h1 className="text-4xl md:text-6xl font-bold text-gray-800 leading-snug text-center">
+                <h1 className="text-xl md:text-6xl font-bold text-gray-800 leading-snug text-center">
                   {banner.title} <br /> {banner.subtitle}
                 </h1>
                 <p className="mt-4 text-gray-500 text-lg text-center">{banner.desc}</p>
@@ -50,7 +50,8 @@ export default function BannerCarousel() {
                   onSubmit={(e) => {
                     e.preventDefault();
                   }}
-                  className="mt-6 flex items-center bg-white rounded-full shadow-md overflow-hidden  mx-auto md:mx-0"
+                  className=" mt-2 md:mt-6 hidden  items-center bg-white rounded-full shadow-md overflow-hidden  mx-auto md:mx-0"
+                  // className=" mt-2 md:mt-6 hidden  md:flex items-center bg-white rounded-full shadow-md overflow-hidden  mx-auto md:mx-0"
                 >
                   <input
                     type="email"

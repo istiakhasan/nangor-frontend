@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }) {
     { name: "Overview", icon: "fa fa-home", href: "#" },
     { name: "Orders", icon: "fa fa-shopping-cart", href: "/orders" },
     { name: "Products", icon: "fa fa-box", href: "/dashboard/products" },
-    { name: "Settings", icon: "fa fa-cog", href: "#" },
+    { name: "Author", icon: "fa fa-cog", href: "/dashboard/author" },
   ];
 
   return (

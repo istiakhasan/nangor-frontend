@@ -6,6 +6,8 @@ import { useSnackbar } from "../../../../component/SnackbarContext";
 import moment from "moment";
 import "./style.css";
 import { usePathname, useRouter } from 'next/navigation';
+import { Modal } from "@mui/material";
+import Image from "next/image";
 
 const ProductDetails = ({ product }) => {
   const dispatch = useDispatch();
@@ -14,6 +16,7 @@ const ProductDetails = ({ product }) => {
   const { cart } = useSelector((state) => state?.cart);
   const pathName=usePathname()
   const router=useRouter()
+   const [open, setOpen] = useState(false);
   // ✅ Check if product already in cart
   const isInCart = cart?.some((item) => item?._id === product?._id);
 
@@ -38,7 +41,8 @@ const ProductDetails = ({ product }) => {
     <div className="col-span-6 h-fit">
       <div className="detail-info">
         <span className="stock-status out-stock">{product?.badge}</span>
-        <h2 className="title-detail text-[40px]">{product?.name}</h2>
+        <h2 className="title-detail text-[40px] mb-2">{product?.name}</h2>
+        <p onClick={()=>setOpen(true)} style={{color:"#3bb77e"}} className="text-[#3bb77e] underline font-[500] cursor-pointer">একটু পড়ে দেখুন</p>
 
         {/* Product Rating */}
         <div className="product-detail-rating">
@@ -169,6 +173,26 @@ const ProductDetails = ({ product }) => {
           </ul>
         </div>
       </div>
+
+        <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        <div className="fixed inset-0 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl w-[600px] max-h-[90vh] flex flex-col shadow-lg">
+            <div className="overflow-y-scroll px-6 py-4 hide-scrollbar">
+           <div className="flex items-center justify-end mb-3"><span className="cursor-pointer" onClick={()=>setOpen(false)}><i className="ri-close-large-fill"></i></span></div>
+              {
+                product?.readMOreImages?.map((item,i)=>(
+                  <img className="w-full h-[90vh] border-[5px] p-2 border-gray-500 mb-2"  src={item} key={i} alt="" />
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

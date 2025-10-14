@@ -15,7 +15,7 @@ export default function AddToCartButton({ item,index }) {
       onClick={()=>{
           handleAddToCart()
       }}
-      className={` text-white px-2 py-1 text-[10px]  rounded ${cartItems?.cart?.some((ab)=>ab?.id===item?.id)?'bg-gray-300':'bg-[#4d321d] cursor-pointer'}`}
+      className={` text-white px-2 py-1 text-[12px] w-full  rounded ${cartItems?.cart?.some((ab)=>ab?.id===item?.id)?'bg-gray-300':'bg-[#4d321d] cursor-pointer'}`}
     >
       {cartItems?.cart?.some((ab)=>ab?.id===item?.id)?'Added':'Add to Cart'}
       
