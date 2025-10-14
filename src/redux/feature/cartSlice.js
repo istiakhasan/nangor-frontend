@@ -80,7 +80,6 @@ export const cartSlice = createSlice({
     },
 
     clearCart: (state) => {
-      console.log('trigger');
       state.cart = [];
       state.total = 0;
       state.shipping = 0;

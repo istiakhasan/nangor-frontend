@@ -28,7 +28,6 @@ const Page = () => {
   ) => {
     setPage(value);
   };
-console.log(data,"data")
   return (
     <div className="p-6 bg-gray-50">
       {/* Top bar */}

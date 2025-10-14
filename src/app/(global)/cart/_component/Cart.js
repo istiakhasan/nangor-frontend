@@ -20,7 +20,7 @@ const CartPage = () => {
   
   // Calculate subtotal
   const subtotal = cartItems?.cart?.reduce((total, item) => total + (item.salePrice * item.quantity), 0);
- console.log(cartItems,subtotal,'robin');
+
   return (
     <main className=" bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className=" mx-auto">

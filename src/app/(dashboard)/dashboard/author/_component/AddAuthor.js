@@ -38,7 +38,6 @@ const AddAuthor = ({ setOpen }) => {
 
       if (res) {
         // ✅ Success handling (you can use toast or snackbar here)
-        console.log("Author created:", res.data);
         reset();
         setOpen(false);
       }

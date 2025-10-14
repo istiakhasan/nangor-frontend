@@ -27,7 +27,6 @@ const Page = () => {
   if (isLoading) {
     return <div className="p-6 text-center text-gray-600">Loading orders...</div>;
   }
-console.log(data,"data");
   return (
      <div className="p-6 bg-gray-50 min-h-screen">
       {/* Header */}
