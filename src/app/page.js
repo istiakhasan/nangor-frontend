@@ -10,10 +10,10 @@ import SubscriptionSection from "../component/SubscriptionSection";
 import TopSearchBar from "../component/TopSearchBar";
 import BottomMenuBar from "../component/BottomMenuBar"; // Import the new component
 import { Suspense } from "react";
-
+import BootLoader from "../component/BootLoader";
 export default function Home({ searchParams }) {
   return (
-    <Suspense fallback={<>Loading Products....</>} className="">
+    <Suspense fallback={<BootLoader show={true} logoText="Nangor"/>} className="">
       {/* <div className="hidden md:block">
         <HeaderTop />
       </div> */}

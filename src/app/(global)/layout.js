@@ -5,10 +5,10 @@ import MenuBar from "../../component/MenuBar";
 import SubscriptionSection from "../../component/SubscriptionSection";
 import TopSearchBar from "../../component/TopSearchBar";
 import BottomMenuBar from "../../component/BottomMenuBar";
-
+import BootLoader from "../../component/BootLoader";
 const GlobalLayout = ({ children }) => {
   return (
-   <Suspense fallback={<div>Loading cart...</div>}>
+   <Suspense fallback={<BootLoader show={true} logoText="Nangor"/>}>
       <div className="">
         <div className="hidden md:block">
           <HeaderTop />

@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [pageAnimating, setPageAnimating] = useState(false);
 
   const menuItems = [
     { name: "Overview", icon: "fa fa-home", href: "#" },
@@ -12,6 +13,17 @@ export default function DashboardLayout({ children }) {
     { name: "Products", icon: "fa fa-box", href: "/dashboard/products" },
     { name: "Author", icon: "fa fa-cog", href: "/dashboard/author" },
   ];
+
+  const handleLinkClick = (href) => {
+    // Trigger animation
+    setPageAnimating(true);
+
+    // Wait for animation duration before navigating
+    setTimeout(() => {
+      setPageAnimating(false);
+      window.location.href = href;
+    }, 300); // animation duration matches transition
+  };
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -25,14 +37,14 @@ export default function DashboardLayout({ children }) {
         </div>
         <nav className="p-4 space-y-2">
           {menuItems.map((item) => (
-            <a
+            <button
               key={item.name}
-              href={item.href}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-200 text-gray-700"
+              onClick={() => handleLinkClick(item.href)}
+              className="flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg hover:bg-gray-200 text-gray-700 transition-colors"
             >
               <i className={`${item.icon}`} aria-hidden="true"></i>
               {item.name}
-            </a>
+            </button>
           ))}
         </nav>
       </aside>
@@ -58,8 +70,14 @@ export default function DashboardLayout({ children }) {
           </div>
         </header>
 
-        {/* Page Content */}
-        <main className="flex-1 p-6 overflow-y-auto">{children}</main>
+        {/* Page Content with animation */}
+        <main
+          className={`flex-1 p-6 overflow-y-auto transition-opacity duration-300 ${
+            pageAnimating ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          {children}
+        </main>
       </div>
     </div>
   );
