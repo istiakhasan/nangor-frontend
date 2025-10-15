@@ -19,14 +19,14 @@ export const categoryApi = baseApi.injectEndpoints({
       }),
       providesTags: ['categories'],
     }),
-    // createMainCategory: build.mutation({
-    //   query: (data) => ({
-    //     url: "/category",
-    //     method: "POST",
-    //     data,
-    //   }),
-    //   invalidatesTags: [tagTypes.mainCategory],
-    // }),
+    createMainCategory: build.mutation({
+      query: (data) => ({
+        url: "/category",
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ['categories'],
+    }),
     // updateCategory: build.mutation({
     //   query: (data) => ({
     //     url: `/category/${data?.id}`,
@@ -35,21 +35,21 @@ export const categoryApi = baseApi.injectEndpoints({
     //   }),
     //   invalidatesTags: [tagTypes.mainCategory],
     // }),
-    // deleteCategory: build.mutation({
-    //   query: (data) => ({
-    //     url: `/main-category/${data?.id}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: [tagTypes.mainCategory],
-    // }),
+    deleteCategory: build.mutation({
+      query: (data) => ({
+        url: `/category/${data?.id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ['categories'],
+    }),
     
   }),
 });
 
 export const {
     useGetAllMainCategoryQuery,
-    useGetCategoryOptionsQuery
-    // useCreateMainCategoryMutation,
+    useGetCategoryOptionsQuery,
+    useCreateMainCategoryMutation,
     // useUpdateCategoryMutation,
-    // useDeleteCategoryMutation
+    useDeleteCategoryMutation
 } = categoryApi;

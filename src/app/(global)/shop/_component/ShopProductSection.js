@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 
-
 import React from "react";
 import SortDropdown from "./SortDropdown";
 import Pagination from "./Pagination";
@@ -9,6 +8,7 @@ import SidebarCategory from "../../../../component/FilterCategoryCard";
 import NewProducts from "../../../../component/NewProducts";
 import { getBaseUrl } from "../../../../helpers/config/envConfig";
 import FillByPrice from "../../../../component/FillbyPrice";
+import MobileFilterSort from "../../../../component/MobileFilterSort";
 
 async function getProducts({
   page,
@@ -18,10 +18,11 @@ async function getProducts({
   authorIds,
   salesPriceMin,
   salesPriceMax,
+   sortBy,      // 👈 added
+  sortOrder,
 }) {
-
   let url = `${getBaseUrl()}/products?limit=${limit}&page=${page}`;
-   if (authorIds?.length > 0) {
+  if (authorIds?.length > 0) {
     authorIds.forEach((id) => {
       url += `&authorIds=${id}`; // send each ID separately
     });
@@ -30,7 +31,8 @@ async function getProducts({
   if (searchTerm) url += `&searchTerm=${searchTerm}`;
   if (salesPriceMin != null) url += `&salesPriceMin=${salesPriceMin}`;
   if (salesPriceMax != null) url += `&salesPriceMax=${salesPriceMax}`;
-
+if (sortBy) url += `&sortBy=${sortBy}`;
+if (sortOrder) url += `&sortOrder=${sortOrder}`;
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch products");
   return res.json();
@@ -47,7 +49,9 @@ async function getCategories() {
 const ShopProductSection = async ({ searchParams }) => {
   const page = parseInt(searchParams?.page || "1", 10);
   const limit = 15;
-const resolvedSearchParams = await searchParams;
+  const resolvedSearchParams = await searchParams;
+  const sortBy = resolvedSearchParams?.sortBy || "";
+    const sortOrder = resolvedSearchParams?.sortOrder || "";
   const categoryId =
     searchParams?.categoryId && searchParams.categoryId !== "undefined"
       ? searchParams.categoryId
@@ -65,18 +69,28 @@ const resolvedSearchParams = await searchParams;
   const salesPriceMax = searchParams?.salesPriceMax
     ? Number(searchParams.salesPriceMax)
     : null;
-    let authorIds = [];
+  let authorIds = [];
   if (resolvedSearchParams?.authorIds) {
-     const mdar=resolvedSearchParams?.authorIds?.split(',')
-     if(mdar?.length>0){
-      authorIds=mdar
-     }else{
-      authorIds=[resolvedSearchParams?.authorIds]
-     }
+    const mdar = resolvedSearchParams?.authorIds?.split(",");
+    if (mdar?.length > 0) {
+      authorIds = mdar;
+    } else {
+      authorIds = [resolvedSearchParams?.authorIds];
+    }
   }
   // fetch products and categories in parallel
   const [products, categories] = await Promise.all([
-    getProducts({ page, limit, categoryId, searchTerm,authorIds, salesPriceMin, salesPriceMax }),
+    getProducts({
+      page,
+      limit,
+      categoryId,
+      searchTerm,
+      authorIds,
+      salesPriceMin,
+      salesPriceMax,
+      sortBy,
+      sortOrder
+    }),
     getCategories(),
   ]);
 
@@ -85,15 +99,13 @@ const resolvedSearchParams = await searchParams;
   return (
     <div className="p-[20px] md:grid grid-cols-5 gap-5">
       <div className="col-span-4">
-        <div className="shop-product-fillter">
-          <div className="totall-product">
-            <p>
-              We found <strong className="text-brand">{products?.meta?.total}</strong> items for you!
-            </p>
-          </div>
-          <SortDropdown />
-        </div>
-
+        
+        <div className="md:hidden"> <MobileFilterSort categories={categories} /></div>
+        <p className="mb-3">
+          We found{" "}
+          <strong className="text-brand">{products?.meta?.total}</strong> items
+          for you!
+        </p>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {products?.data?.map((item, index) => (
             <ProductCard key={item.id} item={item} index={index} />
@@ -110,7 +122,7 @@ const resolvedSearchParams = await searchParams;
         </div>
       </div>
 
-      <div className="sticky top-0 h-fit">
+      <div className="sticky top-0 h-[80vh] overflow-y-scroll hidden md:block">
         <SidebarCategory categoryData={categories?.data} />
         <FillByPrice page="shop" />
         <NewProducts />

@@ -2,11 +2,10 @@
 "use client";
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import AddProduct from "./_component/AddProduct";
-import { Modal, Tooltip, IconButton, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material";
-import { useGetAllProductQuery, useDeleteProductByIdMutation } from "../../../../redux/api/productApi";
+import AddCategory from "./_component/AddCategory";
+import { Modal,  IconButton, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material";
+import { useGetAllMainCategoryQuery,useDeleteCategoryMutation } from "../../../../redux/api/categoryApi";
 import moment from "moment";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import GlobalPagination from "../../../../component/GlobalPagination";
 
@@ -18,13 +17,13 @@ const Page = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const limit = 5;
 
-  const { data } = useGetAllProductQuery({
+  const { data } = useGetAllMainCategoryQuery({
     page,
     limit,
     searchTerm,
   });
 
-  const [deleteProduct] = useDeleteProductByIdMutation();
+  const [deleteCategory] = useDeleteCategoryMutation();
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -38,9 +37,10 @@ const Page = () => {
   const handleConfirmDelete = async () => {
     if (selectedProduct) {
       try {
-        await deleteProduct({id:selectedProduct.id}).unwrap();
+      const result=  await deleteCategory({id:selectedProduct.id}).unwrap();
+      console.log(result,"result")
       } catch (err) {
-        console.error("Failed to delete product:", err);
+        console.error("Failed to delete category:", err);
       }
       setConfirmOpen(false);
       setSelectedProduct(null);
@@ -77,70 +77,26 @@ const Page = () => {
   <thead>
     <tr>
       <th className="text-start">Name</th>
-      <th className="text-start">ID</th>
       <th className="text-start">Created At</th>
-      <th className="text-start">Description</th>
       <th className="text-start">Image</th>
-      <th className="text-start">Stock</th>
-      <th className="text-start">Price</th>
-      <th className="text-start">Badge</th>
-      <th className="text-start">Status</th>
-      <th className="text-start">Actions</th>
+      <th className="text-end">Actions</th>
     </tr>
   </thead>
   <tbody>
     {data?.data?.map((item) => {
-      const isLong = item?.description?.length > 50;
-      const shortDesc = isLong ? item?.description.slice(0, 50) + "..." : item?.description;
       return (
         <tr key={item?.id}>
-          <td>{item?.name}</td>
-          <td>{item?.id}</td>
+          <td>{item?.label}</td>
           <td>{moment(item?.createdAt).format("DD-MM-YYYY")}</td>
-          <td className="max-w-[200px] truncate">
-            {shortDesc}
-            {isLong && (
-              <Tooltip
-                slotProps={{
-                  tooltip: {
-                    sx: {
-                      background: "white",
-                      color: "black",
-                      fontSize: "12px",
-                      boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.3)",
-                    },
-                  },
-                }}
-                title={item?.description}
-                arrow
-                placement="top"
-              >
-                <IconButton size="small">
-                  <InfoOutlinedIcon fontSize="small" />
-                </IconButton>
-              </Tooltip>
-            )}
-          </td>
+
           <td>
             <img
               className="w-10 h-10 object-cover rounded-lg shadow-sm border"
-              src={item?.images[0]?.url}
+              src={item?.image}
               alt={item?.name}
             />
           </td>
-          <td>{item?.stock ?? "N/A"}</td>
-          <td>{item?.salePrice} Tk</td>
-          <td>
-            <span className="bg-green-100 text-green-800 px-3 py-1 text-sm font-medium">
-              {item?.badge || "N/A"}
-            </span>
-          </td>
-          <td>
-            <span className="bg-blue-100 text-blue-800 px-3 py-1 text-sm font-medium">
-              Available
-            </span>
-          </td>
-          <td>
+          <td className="text-end">
             <IconButton color="error" onClick={() => handleDeleteClick(item)}>
               <DeleteIcon />
             </IconButton>
@@ -161,9 +117,9 @@ const Page = () => {
       {/* Product Create Modal */}
       <Modal open={open} onClose={() => setOpen(false)} aria-labelledby="modal-title" aria-describedby="modal-description">
         <div className="fixed inset-0 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl w-[700px] max-h-[90vh] flex flex-col shadow-lg">
+          <div className="bg-white rounded-xl w-[500px] max-h-[90vh] flex flex-col shadow-lg">
             <div className="overflow-y-scroll px-6 py-4 hide-scrollbar">
-              <AddProduct setOpen={setOpen} />
+              <AddCategory setOpen={setOpen} />
             </div>
           </div>
         </div>
@@ -174,8 +130,8 @@ const Page = () => {
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to delete the product{" "}
-            <strong>{selectedProduct?.name}</strong>? This action cannot be undone.
+            Are you sure you want to delete the category{" "}
+            <strong>{selectedProduct?.label}</strong>? This action cannot be undone.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

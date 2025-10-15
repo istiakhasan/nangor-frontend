@@ -51,18 +51,18 @@ const Footer = () => {
       {/* Featured Section */}
       <section className="featured section-padding">
         <div className=" mx-auto p-[20px]">
-          <div className="md:grid grid-cols-5">
+          <div className="md:grid grid-cols-4">
             {[
               {
                 icon: "icon-1.svg",
                 title: "Best prices & offers",
                 text: "Orders $50 or more",
               },
-              {
-                icon: "icon-2.svg",
-                title: "Free delivery",
-                text: "24/7 amazing services",
-              },
+              // {
+              //   icon: "icon-2.svg",
+              //   title: "Free delivery",
+              //   text: "24/7 amazing services",
+              // },
               {
                 icon: "icon-3.svg",
                 title: "Great daily deal",

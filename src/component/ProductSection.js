@@ -5,6 +5,7 @@ import FillByPrice from "./FillbyPrice";
 import NewProducts from "./NewProducts";
 import { getBaseUrl } from "../helpers/config/envConfig";
 import Link from "next/link";
+import MobileFilterSort from "./MobileFilterSort";
 async function getProducts({
   page,
   limit,
@@ -13,6 +14,8 @@ async function getProducts({
   authorIds, // currently a comma-separated string
   salesPriceMin,
   salesPriceMax,
+  sortBy,      // 👈 added
+  sortOrder,
 }) {
 
   let url = `${getBaseUrl()}/products?limit=${limit}&page=${page}`;
@@ -25,7 +28,8 @@ async function getProducts({
   }
   if (salesPriceMin != null) url += `&salesPriceMin=${salesPriceMin}`;
   if (salesPriceMax != null) url += `&salesPriceMax=${salesPriceMax}`;
-
+if (sortBy) url += `&sortBy=${sortBy}`;
+if (sortOrder) url += `&sortOrder=${sortOrder}`;
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch products");
   return res.json();
@@ -42,6 +46,8 @@ async function getCategories() {
 
 const ProductSection = async ({ searchParams }) => {
   const resolvedSearchParams = await searchParams;
+  const sortBy = resolvedSearchParams?.sortBy || "";
+  const sortOrder = resolvedSearchParams?.sortOrder || "";
   const categoryId = resolvedSearchParams?.categoryId || "";
     let authorIds = [];
   if (resolvedSearchParams?.authorIds) {
@@ -74,6 +80,8 @@ const ProductSection = async ({ searchParams }) => {
       authorIds,
       salesPriceMin,
       salesPriceMax,
+      sortBy,
+      sortOrder
     }),
     getCategories(),
   ]);
@@ -84,8 +92,8 @@ const ProductSection = async ({ searchParams }) => {
   return (
     <div className="p-[20px] md:grid grid-cols-4 gap-5">
       <div className="col-span-3">
-        <div className="flex flex-wrap  justify-between mb-6">
-          <h3 className="text-[32px] font-bold mb-6 md:mb-0">Popular Books</h3>
+        <div className="hidden md:flex flex-wrap  justify-between mb-6">
+          <h3 className="md:text-[32px] text-[18px] font-bold mb-6 md:mb-0">Popular Books</h3>
           <ul className="flex">
             <li>
               <Link
@@ -130,7 +138,9 @@ const ProductSection = async ({ searchParams }) => {
             })}
           </ul>
         </div>
-
+          
+   
+        <div className="md:hidden"><MobileFilterSort categories={categories} /></div>
         <div className="grid md:grid-cols-5 grid-cols-2 gap-3 mb-4">
           {products?.data?.map((item, index) => (
             <ProductCard key={item.id} item={item} index={index} />
@@ -138,7 +148,7 @@ const ProductSection = async ({ searchParams }) => {
         </div>
       </div>
 
-      <div>
+      <div className="hidden md:block">
         <SidebarCategory categoryData={categories?.data} />
         <FillByPrice />
         <NewProducts />

@@ -17,8 +17,8 @@ const SidebarCategory = ({ categoryData }) => {
     }
   };
   return (
-    <div className="sidebar-widget widget-category-2 mb-[20px]">
-      <h5 className="section-title style-1 mb-[20px]">Category</h5>
+    <div className="sidebar-widget widget-category-2 md:mb-[20px]">
+      <h5 className="section-title style-1 md:mb-[20px] mb-6">Category</h5>
       <ul>
         {categoryData?.map((category, index) => (
           <li

@@ -19,10 +19,10 @@ export default function BottomMenuBar({ cartCount = 0 }) {
   const [openSidebar, setOpenSidebar] = useState(false);
    const cartItems = useSelector((state) => state.cart);
   const menuItems = [
-      { path: "/categories", icon: <AppsIcon />, label: "Categories" },
+      // { path: "/categories", icon: <AppsIcon />, label: "Categories" },
     { path: "/", icon: <HomeIcon />, label: "Home" },
     { path: "/cart", icon: <ShoppingCartIcon />, label: "Cart", showBadge: true },
-    { path: "/account", icon: <AccountCircleIcon />, label: "Account" },
+    // { path: "/account", icon: <AccountCircleIcon />, label: "Account" },
   ];
   const sidebarMenu = [
     { path: "/", icon: <HomeIcon />, label: "Home" },

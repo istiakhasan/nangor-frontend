@@ -56,7 +56,7 @@ const CategorySlider = () => {
         <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
           Shop by Categories
         </h2>
-        <button className="text-gray-500 hover:text-green-600 font-medium text-sm sm:text-base">
+        <button className="text-gray-500 hidden hover:text-green-600 font-medium text-sm sm:text-base">
           All Categories →
         </button>
       </div>

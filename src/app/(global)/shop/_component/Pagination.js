@@ -1,4 +1,4 @@
-"use client"; // only if you plan to use client hooks, otherwise remove
+"use client";
 
 import Link from "next/link";
 import React from "react";

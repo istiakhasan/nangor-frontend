@@ -5,7 +5,7 @@ import ArchiveHeader from './ArchiveHeader';
 const Shop = ({searchParams}) => {
     return (
         <div >
-            <ArchiveHeader />
+            {/* <ArchiveHeader /> */}
             <ShopProductSection searchParams={searchParams} />
         </div>
     );

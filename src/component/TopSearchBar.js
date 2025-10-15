@@ -66,8 +66,9 @@ const TopSearchBar = () => {
       className="md:flex justify-between items-center py-4 px-4"
     >
       {/* Logo */}
-      <img
-        className="w-[100px] mx-auto"
+      <img 
+        onClick={()=>router.push('/')}
+        className="w-[100px] mx-auto cursor-pointer"
         src={'https://i.ibb.co.com/5ggRm6QC/nonggor.png'}
         alt="Logo"
       />
