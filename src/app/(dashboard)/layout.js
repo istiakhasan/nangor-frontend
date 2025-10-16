@@ -82,7 +82,7 @@ export default function DashboardLayout({ children }) {
       >
         <div>
           <div className="p-7 shadow">
-            <h2 className="text-xl font-bold text-gray-800">Ngr</h2>
+            <h2 onClick={()=>handleLinkClick('/')} className="text-xl font-bold text-gray-800 cursor-pointer">Nonggor</h2>
           </div>
           <nav className="p-4 space-y-2">
             {menuItems.map((item) => (
