@@ -18,7 +18,7 @@ const NGInput = ({
 }) => {
   const { control, formState: { errors } } = useFormContext();
   const errorMessage = getErrorMessageByPropertyName(errors, name);
-
+ console.log(errors,"dasf")
   return (
     <Controller
       control={control}

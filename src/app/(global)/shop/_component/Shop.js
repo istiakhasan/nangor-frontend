@@ -4,7 +4,7 @@ import ArchiveHeader from './ArchiveHeader';
 
 const Shop = ({searchParams}) => {
     return (
-        <div >
+        <div className='container mx-auto'>
             {/* <ArchiveHeader /> */}
             <ShopProductSection searchParams={searchParams} />
         </div>

@@ -1,6 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
-import React from "react";
+import React ,{useState}from "react";
 import {
   useGetAllProductQuery,
   useGetProductByIdQuery,
@@ -12,6 +12,7 @@ import Slider from "react-slick";
 import ProductCard from "../../../../component/ProductCard";
 const ProductDetailsSection = () => {
   const params = useParams();
+  const [open,setOpen]=useState(false)
   const { data, isLoading } = useGetProductByIdQuery({
     id: params?.slug,
     type: "id",
@@ -53,17 +54,13 @@ const ProductDetailsSection = () => {
   if (isLoading) return;
   return (
     <section className="md:grid grid-cols-12 gap-[30px]  px-0 pt-5 mx-auto pb-5">
-      <div className="col-span-6 px-4">
-        <ProductImageSlider
-          images={data?.data?.data?.images?.map((item) => {
-            return {
-              original: item?.url,
-              thumbnail: item?.url,
-            };
-          })}
-        />
+      <div className="col-span-12 md:flex gap-[30px] px-4">
+        <div  onClick={()=>setOpen(true)} className="w-[312px] md:sticky md:top-[100px] relative mb-3  h-[400px] border-1 border-gray-400 px-[34px] py-[41px]">
+          <p style={{color:"#E43A36",fontSize:"14px",fontWeight:"bold"}}  className="text-[#3bb77e]  text-[18px]  font-[500] absolute top-[10px] right-[34px] cursor-pointer">একটু পড়ে দেখুন</p>
+           <img className="h-[100%] w-[100%] hover:border-r-[10px] border-gray-400 cursor-pointer"  alt="" src={data?.data?.data?.images[0]?.url} />
+        </div>
+       <ProductDetails product={data?.data?.data} open={open} setOpen={setOpen} />
       </div>
-      <ProductDetails product={data?.data?.data} />
       <div className="col-span-12 ">
         <ProductInfo product={data?.data?.data} />
       </div>

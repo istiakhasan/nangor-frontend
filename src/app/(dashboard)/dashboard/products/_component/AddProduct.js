@@ -13,7 +13,8 @@ import { useGetAllMainCategoryQuery } from "../../../../../redux/api/categoryApi
 import { useGetAuthorApiOptionsQuery } from "@/redux/api/authorApi";
 import MaterialRichEditor from "@/component/MaterialRichEditor";
 import { useFormContext } from "react-hook-form";
-
+import { productSchema } from "../../../../../schema/schema";
+import { yupResolver } from "@hookform/resolvers/yup"; 
 const AddProduct = ({ setOpen }) => {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: "", severity: "success" });
@@ -73,7 +74,7 @@ const AddProduct = ({ setOpen }) => {
     <div className="p-6 bg-gray-50 rounded-md shadow-md">
       <h2 className="text-2xl font-semibold text-gray-700 mb-6">Create Product</h2>
 
-      <NGForm submitHandler={(data, reset) => handleSubmit(data, reset)}>
+      <NGForm   resolver={yupResolver(productSchema)} submitHandler={(data, reset) => handleSubmit(data, reset)}>
         {/* Product Name */}
         <div className="mb-4">
           <NGInput label="Product Name" name="name" placeholder="Enter product name" />

@@ -9,14 +9,13 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Modal } from "@mui/material";
 import Image from "next/image";
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = ({ product,open,setOpen }) => {
   const dispatch = useDispatch();
   const { showSnackbar } = useSnackbar();
   const [quantity, setQuantity] = useState(1);
   const { cart } = useSelector((state) => state?.cart);
   const pathName=usePathname()
   const router=useRouter()
-   const [open, setOpen] = useState(false);
   // ✅ Check if product already in cart
   const isInCart = cart?.some((item) => item?._id === product?._id);
 
@@ -38,7 +37,7 @@ const ProductDetails = ({ product }) => {
   };
 
   return (
-    <div className="col-span-6 h-fit">
+    <div className="flex-1 h-fit">
       <div className="detail-info">
         <span className="stock-status out-stock">{product?.badge}</span>
         <h2 className="title-detail text-[40px] mb-2">{product?.name}</h2>
@@ -71,7 +70,7 @@ const ProductDetails = ({ product }) => {
 
         {/* Short Description */}
         <div className="short-desc mb-[30px]">
-          <p className="font-lg">{product?.description}</p>
+          <p className="font-lg">{product?.description?.length>200?`${product?.description?.slice(0,200)}...`:product?.description}</p>
         </div>
 
         {/* Quantity & Add to Cart */}
@@ -185,8 +184,8 @@ const ProductDetails = ({ product }) => {
             <div className="overflow-y-scroll px-6 py-4 hide-scrollbar">
            <div className="flex items-center justify-end mb-3"><span className="cursor-pointer" onClick={()=>setOpen(false)}><i className="ri-close-large-fill"></i></span></div>
               {
-                product?.readMOreImages?.map((item,i)=>(
-                  <img className="w-full h-[90vh] border-[5px] p-2 border-gray-500 mb-2"  src={item} key={i} alt="" />
+                product?.readMoreImages?.map((item,i)=>(
+                  <img className="w-full md:h-[90vh] h-[70vh] border-[5px] p-2 border-gray-500 mb-2"  src={item} key={i} alt="" />
                 ))
               }
             </div>

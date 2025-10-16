@@ -3,12 +3,12 @@
 
 import React, { useEffect } from "react";
 import Slider from "react-slick";
-import { useGetCategoryOptionsQuery } from "../redux/api/categoryApi";
+import { useGetCategoryOptionsQuery ,useGetAllMainCategoryQuery} from "../redux/api/categoryApi";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css"; // ✅ important for layout after reload
 
 const CategorySlider = () => {
-  const { data: categoryData } = useGetCategoryOptionsQuery(undefined);
+  const { data: categoryData } = useGetAllMainCategoryQuery(undefined);
 
   // Fix slick slider rendering issues after hydration
   useEffect(() => {
@@ -65,11 +65,9 @@ const CategorySlider = () => {
       <Slider {...settings}>
         {categoryData?.data?.map((cat) => (
           <div key={cat.id} className="px-2 sm:px-4">
-            <div className="flex flex-col items-center justify-center min-h-[140px] sm:min-h-[180px] bg-gray-50 rounded-2xl shadow-sm hover:shadow-md cursor-pointer p-4 sm:p-6 transition-all duration-200">
+            <div className="flex flex-col items-center justify-center min-h-[140px] sm:min-h-[180px] bg-gray-50 rounded-2xl  hover:shadow-md cursor-pointer p-4 sm:p-6 transition-all duration-200">
               <img
-                src={
-                  "https://nest-frontend-v6.vercel.app/assets/imgs/theme/icons/category-11.svg"
-                }
+                src={cat?.image}
                 alt={cat?.label}
                 className="w-12 h-12 sm:w-16 sm:h-16 mb-2 sm:mb-4"
               />

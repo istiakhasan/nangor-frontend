@@ -61,7 +61,7 @@
 }
 
 .text-brand {
-    color: rgb(59, 183, 126) !important;
+    color: #4d321d !important;
 }
 
 .clearfix::after {
@@ -102,7 +102,7 @@
 .detail-extralink .detail-qty {
     font-size: 16px;
     font-weight: 700;
-    color: rgb(59, 183, 126);
+    color: #4d321d;
     max-width: 90px;
     margin: 0px 6px 15px 0px;
     background: rgb(255, 255, 255);
@@ -110,7 +110,7 @@
     padding: 11px 20px 11px 30px;
     border-width: 2px !important;
     border-style: solid !important;
-    border-color: rgb(59, 183, 126) !important;
+    border-color: #4d321d !important;
     border-image: initial !important;
 }
 
@@ -133,7 +133,7 @@
     font-size: 16px;
     position: absolute;
     right: 8px;
-    color: rgb(59, 183, 126);
+    color: #4d321d;
 }
 input.qty-val {
     height: unset;
@@ -152,7 +152,7 @@ input.qty-val {
     font-size: 16px;
     position: absolute;
     right: 8px;
-    color: rgb(59, 183, 126);
+    color: #4d321d;
 }
 .detail-extralink > div {
     display: inline-block;

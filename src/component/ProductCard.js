@@ -39,7 +39,7 @@ export default function ProductCard({ item, index }) {
             <img
               src={item?.images[0]?.url}
               alt={item?.name || "Product"}
-              className="default-img w-full h-[180px] md:h-64 transition-transform duration-300 hover:border-t-[7px] hover:border-r-[7px] border-gray-400"
+              className="default-img w-full h-[180px] md:h-64 transition-transform duration-300 "
             />
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function ProductCard({ item, index }) {
       <div className="product-content-wrap px-[10px] md:px-[20px] py-[20px] mt-3 md:mt-0 flex flex-col justify-between md:flex-1">
         <div>
           <div className="product-category text-sm text-gray-500">
-            <Link href="/shop-grid-right">{item?.category?.label}</Link>
+            <Link href={`/shop/${item?.id}`}>{item?.category?.label}</Link>
           </div>
           <h2 className="text-[14px] md:text-[16px] font-semibold text-gray-800 mt-1">
             <div
@@ -74,12 +74,11 @@ export default function ProductCard({ item, index }) {
           </h2>
           <div className="text-xs text-gray-500 mt-1">
             By{" "}
-            <Link
-              href="/vendor-details-1"
+            <span
               className="text-blue-600 hover:underline"
             >
               nangor
-            </Link>
+            </span>
           </div>
         </div>
 

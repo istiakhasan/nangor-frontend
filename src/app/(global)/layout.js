@@ -10,9 +10,6 @@ const GlobalLayout = ({ children }) => {
   return (
    <Suspense fallback={<BootLoader show={true} logoText="Nangor"/>}>
       <div className="">
-        {/* <div className="hidden md:block">
-          <HeaderTop />
-        </div> */}
         <TopSearchBar />
         <MenuBar />
         {children}

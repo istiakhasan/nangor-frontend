@@ -9,6 +9,7 @@ import NewProducts from "../../../../component/NewProducts";
 import { getBaseUrl } from "../../../../helpers/config/envConfig";
 import FillByPrice from "../../../../component/FillbyPrice";
 import MobileFilterSort from "../../../../component/MobileFilterSort";
+import AnimatedSection from "../../../../component/AnimatedSection";
 
 async function getProducts({
   page,
@@ -97,8 +98,8 @@ const ShopProductSection = async ({ searchParams }) => {
   const totalPages = Math.ceil(products?.meta?.total / limit);
 
   return (
-    <div className="p-[20px] md:grid grid-cols-5 gap-5">
-      <div className="col-span-4">
+    <div className="p-[20px] md:grid grid-cols-4 gap-5">
+      <div className="col-span-3">
         
         <div className="md:hidden"> <MobileFilterSort categories={categories} /></div>
         <p className="mb-3">
@@ -106,13 +107,16 @@ const ShopProductSection = async ({ searchParams }) => {
           <strong className="text-brand">{products?.meta?.total}</strong> items
           for you!
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {products?.data?.map((item, index) => (
-            <ProductCard key={item.id} item={item} index={index} />
+            <AnimatedSection key={item.id}>
+
+            <ProductCard  item={item} index={index} />
+            </AnimatedSection>
           ))}
 
           {/* Pagination */}
-          <div className="md:col-span-5">
+          <div className="md:col-span-4">
             <Pagination
               totalPages={totalPages}
               currentPage={page}

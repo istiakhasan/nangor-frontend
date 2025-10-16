@@ -3,7 +3,7 @@ import NewProducts from "../../../../component/NewProducts";
 import ProductDetailsSection from "../_component/ProductDetailsSection";
 const Page = () => {
   return (
-    <div className="p-[20px] md:grid grid-cols-5 gap-5">
+    <div className="p-[20px] container mx-auto md:grid grid-cols-5 gap-5">
       <div className="col-span-4">
         <ProductDetailsSection />
       </div>

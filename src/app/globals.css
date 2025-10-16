@@ -837,7 +837,7 @@ cubic-bezier(0.645, 0.045, 0.355, 1);
 .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-total h4 span {
     font-size: 18px;
     float: right;
-    color: rgb(59, 183, 126);
+    color: #4d321d;
 }
 .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-button {
     display: flex;
@@ -850,10 +850,10 @@ cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-button a.outline {
     background-color: transparent;
-    color: rgb(59, 183, 126);
+    color: #4d321d;
     border-width: 2px;
     border-style: solid;
-    border-color: rgb(59, 183, 126);
+    border-color: #4d321d;
     border-image: initial;
 }
 .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-button a {
@@ -861,13 +861,13 @@ cubic-bezier(0.645, 0.045, 0.355, 1);
     font-size: 14px;
     color: rgb(255, 255, 255);
     line-height: 1;
-    background-color: rgb(59, 183, 126);
+    background-color: #4d321d;
     font-family: Quicksand, sans-serif;
     border-radius: 4px;
     padding: 10px 20px;
     border-width: 2px;
     border-style: solid;
-    border-color: rgb(59, 183, 126);
+    border-color: #4d321d;
     border-image: initial;
 }
 .cart-dropdown-wrap ul li .shopping-cart-title {
@@ -880,7 +880,7 @@ cubic-bezier(0.645, 0.045, 0.355, 1);
     margin: 0px 0px 9px;
 }
 .cart-dropdown-wrap ul li .shopping-cart-title h4 a {
-    color: rgb(59, 183, 126);
+    color: #4d321d;
 }
 .cart-dropdown-wrap ul li .shopping-cart-delete {
     display: flex;

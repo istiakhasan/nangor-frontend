@@ -6,6 +6,7 @@ import NewProducts from "./NewProducts";
 import { getBaseUrl } from "../helpers/config/envConfig";
 import Link from "next/link";
 import MobileFilterSort from "./MobileFilterSort";
+import AnimatedSection from "./AnimatedSection";
 async function getProducts({
   page,
   limit,
@@ -141,14 +142,16 @@ const ProductSection = async ({ searchParams }) => {
           
    
         <div className="md:hidden"><MobileFilterSort categories={categories} /></div>
-        <div className="grid md:grid-cols-5 grid-cols-2 gap-3 mb-4">
+        <div className="grid md:grid-cols-4 grid-cols-2 gap-3 mb-4">
           {products?.data?.map((item, index) => (
-            <ProductCard key={item.id} item={item} index={index} />
+            <AnimatedSection  key={item.id}>
+            <ProductCard  item={item} index={index} />
+               </AnimatedSection>
           ))}
         </div>
       </div>
 
-      <div className="hidden md:block">
+      <div className="hidden sticky h-fit top-0 md:block">
         <SidebarCategory categoryData={categories?.data} />
         <FillByPrice />
         <NewProducts />
