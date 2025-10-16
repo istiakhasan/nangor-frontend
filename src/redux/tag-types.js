@@ -23,4 +23,5 @@
       "dashboard",
       "order",
       "author",
+      "auth",
   ];

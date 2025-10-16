@@ -1,4 +1,3 @@
-import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi"; 
 
 export const authApi = baseApi.injectEndpoints({
@@ -9,14 +8,14 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         data,
       }),
-      invalidatesTags: [tagTypes.auth],
+      invalidatesTags: ['auth'],
     }),
     getProfileInfo: build.query({
       query: () => ({
         url: "/auth/profile",
         method: "GET"
       }),
-      providesTags: [tagTypes.auth,tagTypes.users],
+      providesTags: ['auth'],
     }),
    
   }),

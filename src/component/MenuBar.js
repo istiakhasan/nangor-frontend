@@ -1,37 +1,35 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
+
 import { useRouter, usePathname } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 
 const MenuBar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [loading, setLoading] = useState(false);
 
-  // ✅ Listen for route change events
-  useEffect(() => {
-    const handleStart = () => setLoading(true);
-    const handleComplete = () => setLoading(false);
+  // ✅ Configure NProgress appearance
+  NProgress.configure({ showSpinner: false, speed: 400, minimum: 0.05 });
 
-    // Simulate Next.js router events (for App Router)
-    window.addEventListener('beforeunload', handleStart);
-    router.prefetch('/'); // prefetching home for smoother UX
-    handleComplete(); // reset if component remounts
-
-    return () => {
-      window.removeEventListener('beforeunload', handleStart);
-    };
-  }, [router]);
-
-  // ✅ When pathname changes (route finished), hide loader
+  // ✅ Hide loader when pathname changes
   useEffect(() => {
     setLoading(false);
+    NProgress.done();
   }, [pathname]);
 
-  const handleNavigate = (path) => {
+  const handleNavigate = async (path) => {
     if (pathname === path) return;
     setLoading(true);
-    router.push(path);
+    NProgress.start();       // Start top progress bar
+    try {
+      await router.push(path);
+    } finally {
+      setLoading(false);
+      NProgress.done();      // Complete top progress bar
+    }
   };
 
   return (
@@ -90,6 +88,17 @@ const MenuBar = () => {
           </div>
         </div>
       </div>
+
+      {/* NProgress custom styles */}
+      <style jsx global>{`
+        #nprogress .bar {
+          background: #4d321d !important;
+          height: 3px !important;
+        }
+        #nprogress .peg {
+          box-shadow: 0 0 10px #4d321d, 0 0 5px #4d321d !important;
+        }
+      `}</style>
     </>
   );
 };

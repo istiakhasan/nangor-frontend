@@ -173,7 +173,7 @@ const TopSearchBar = () => {
         </div>
 
         {/* Account */}
-        <span>
+        <span onClick={()=>router.push('/dashboard')} className="cursor-pointer">
           <i className="ri-user-line text-[34px]"></i><span className="hidden md:inline">Account</span>
         </span>
       </div>

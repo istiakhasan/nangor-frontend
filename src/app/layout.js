@@ -2,7 +2,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "../lib/Provider";
 
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -20,19 +19,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <Providers>
-      <html lang="en">
-        <head>
-          <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-            rel="stylesheet"
-          />
-          <link rel="icon" href="/nongor.png" type="image/png" />
-        </head>
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
-          {children}
-        </body>
-      </html>
-    </Providers>
+    <html lang="en">
+      <head>
+        <link
+          href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+          rel="stylesheet"
+        />
+        <link rel="icon" href="/nongor.png" type="image/png" />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        {/* ✅ Providers must be inside <body>, not wrapping <html> */}
+        <Providers>{children}</Providers>
+      </body>
+    </html>
   );
 }

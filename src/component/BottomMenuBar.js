@@ -13,7 +13,10 @@ import AppsIcon from "@mui/icons-material/Apps";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useSelector } from "react-redux";
-
+import InfoIcon from "@mui/icons-material/Info";
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import MenuIcon from "@mui/icons-material/Menu";
 export default function BottomMenuBar({ cartCount = 0 }) {
   const pathName = usePathname();
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -26,12 +29,11 @@ export default function BottomMenuBar({ cartCount = 0 }) {
   ];
   const sidebarMenu = [
     { path: "/", icon: <HomeIcon />, label: "Home" },
-    { path: "/about", icon: <AppsIcon />, label: "About" },
-    { path: "/shop", icon: <ShoppingCartIcon />, label: "shop"},
-    { path: "/cart", icon: <AccountCircleIcon />, label: "Cart" },
-    { path: "/contact", icon: <AccountCircleIcon />, label: "Contact" },
+    { path: "/about", icon: <InfoIcon />, label: "About" },
+    { path: "/shop", icon: <StorefrontIcon />, label: "Shop" },
+    { path: "/cart", icon: <ShoppingCartIcon />, label: "Cart" },
+    { path: "/contact", icon: <ContactMailIcon />, label: "Contact" },
   ];
-console.log(cartItems?.cart,"abcd");
   return (
     <>
       {/* Bottom Menu Bar */}

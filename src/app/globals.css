@@ -441,6 +441,7 @@ ease-out 0s;
 /* Footer */
 .newsletter {
     position: relative;
+    z-index: -10;
 }
 .newsletter .newsletter-inner {
     background: url('https://nest-frontend-v6.vercel.app/assets/imgs/banner/banner-10.png') no-repeat center;
@@ -504,6 +505,7 @@ ease-out 0s;
 .banner-left-icon {
     position: relative;
     background: #F4F6FA;
+    z-index:-10;
     padding: 20px;
     border-radius: 10px;
 }
