@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 // components/ProductCard.js
 "use client";
 import Link from "next/link";
@@ -79,15 +78,7 @@ export default function ProductCard({ item, index }) {
         {/* Product Image - Updated to square aspect ratio */}
         <div className="relative pt-[100%]">
           {/* Square ratio (1:1) */}
-          <img
-            src={isImageError ? "/placeholder-book.png" : item?.images[0]?.url}
-            alt={item?.name || "Book"}
-          
-            className={`object-contain transition-transform duration-500 group-hover:scale-105 ${
-              isImageLoaded ? "opacity-100" : "opacity-0"
-            }`}
-          />
-          {/* <Image
+          <Image
             src={isImageError ? "/placeholder-book.png" : item?.images[0]?.url}
             alt={item?.name || "Book"}
             fill
@@ -98,7 +89,7 @@ export default function ProductCard({ item, index }) {
             onLoad={() => setIsImageLoaded(true)}
             onError={() => setIsImageError(true)}
             priority={index < 4}
-          /> */}
+          />
         </div>
 
         {/* Badge */}
