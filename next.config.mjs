@@ -1,4 +1,3 @@
-// next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -8,7 +7,9 @@ const nextConfig = {
         hostname: "i.ibb.co",
       },
     ],
+    unoptimized: false, // keep optimization enabled
   },
+  reactStrictMode: true,
 };
 
 export default nextConfig;
