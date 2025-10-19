@@ -1,15 +1,18 @@
-/* eslint-disable @next/next/no-img-element */
 // components/ProductCard.js
-"use client"
+"use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import AddToCartButton from "./AddToCartButton";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import Image from "next/image";
 
 export default function ProductCard({ item, index }) {
   const router = useRouter();
+  const [isWishlisted, setIsWishlisted] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isImageError, setIsImageError] = useState(false);
 
   const badgeStyles = {
     hot: "bg-red-500 text-white",
@@ -27,75 +30,177 @@ export default function ProductCard({ item, index }) {
     }
   };
 
+  const toggleWishlist = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsWishlisted(!isWishlisted);
+  };
+
+  const renderRating = () => {
+    const rating = item?.rating || 4.5;
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+    return (
+      <div className="flex items-center mt-1">
+        {[...Array(fullStars)].map((_, i) => (
+          <i
+            key={`full-${i}`}
+            className="ri-star-fill text-yellow-400 text-sm"
+          ></i>
+        ))}
+        {hasHalfStar && (
+          <i className="ri-star-half-fill text-yellow-400 text-sm"></i>
+        )}
+        {[...Array(emptyStars)].map((_, i) => (
+          <i
+            key={`empty-${i}`}
+            className="ri-star-line text-gray-300 text-sm"
+          ></i>
+        ))}
+        <span className="text-xs text-gray-500 ml-1">
+          ({item?.reviews || 24})
+        </span>
+      </div>
+    );
+  };
+
   return (
-    <div className="product-cart-wrap md:mb-6 h-full flex flex-col duration-300 hover:-translate-y-1 hover:scale-[1.02]">
+    <div className="product-card bg-white rounded-xl shadow-md overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group relative">
       {/* Product Image & Actions */}
-      <div className="product-img-action-wrap relative group">
-        <div className="product-img product-img-zoom pt-[30px] md:pt-0 px-[20px] md:px-0 overflow-hidden md:py-5">
-          <div
-            onClick={() => handleNavigate(`/shop/${item?.id}`)}
-            className="cursor-pointer"
-          >
-            <img
-              src={item?.images[0]?.url}
-              alt={item?.name || "Product"}
-              className="default-img w-full h-[180px] md:h-64 transition-transform duration-300 "
-            />
-          </div>
+      <div className="product-image-container relative overflow-hidden">
+        {/* Image skeleton loader */}
+        {!isImageLoaded && (
+          <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>
+        )}
+
+        {/* Product Image - Updated to square aspect ratio */}
+        <div className="relative pt-[100%]">
+          {/* Square ratio (1:1) */}
+          <Image
+            src={isImageError ? "/placeholder-book.png" : item?.images[0]?.url}
+            alt={item?.name || "Book"}
+            fill
+            className={`object-contain transition-transform duration-500 group-hover:scale-105 ${
+              isImageLoaded ? "opacity-100" : "opacity-0"
+            }`}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            onLoad={() => setIsImageLoaded(true)}
+            onError={() => setIsImageError(true)}
+            priority={index < 4}
+          />
         </div>
 
         {/* Badge */}
         {item?.badge && (
-          <div className="product-badges absolute top-0 left-3">
+          <div className="absolute top-3 left-3 z-10">
             <span
-              className={`text-xs font-semibold px-2 py-1 rounded ${
-                badgeStyles[item?.badge?.toLowerCase()] || "bg-gray-500 text-white"
+              className={`text-xs font-bold px-3 py-1 rounded-full shadow-sm ${
+                badgeStyles[item?.badge?.toLowerCase()] ||
+                "bg-gray-500 text-white"
               }`}
             >
               {item?.badge}
             </span>
           </div>
         )}
+
+        {/* Wishlist Button */}
+        <button
+          onClick={toggleWishlist}
+          className="absolute top-3 right-3 z-10 bg-white rounded-full p-2 shadow-md transition-all duration-300 hover:bg-red-50 hover:scale-110"
+          aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+        >
+          {isWishlisted ? (
+            <i className="ri-heart-fill text-red-500 text-lg"></i>
+          ) : (
+            <i className="ri-heart-line text-gray-600 text-lg group-hover:text-red-500"></i>
+          )}
+        </button>
+
+        {/* Quick View Button */}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            // Implement quick view modal logic here
+          }}
+          className="absolute bottom-3 cursor-pointer right-3 z-10 bg-white rounded-full p-2 shadow-md opacity-0 transition-all duration-300 group-hover:opacity-100 hover:bg-blue-50 hover:scale-110"
+          aria-label="Quick view"
+        >
+          <i className="ri-eye-line text-gray-600 text-lg group-hover:text-blue-500"></i>
+        </button>
+
+        {/* Discount Percentage */}
+        {item?.regularPrice && item?.salePrice && (
+          <div className="absolute bottom-3 left-3 z-10 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+            {Math.round(
+              ((item.regularPrice - item.salePrice) / item.regularPrice) * 100
+            )}
+            % OFF
+          </div>
+        )}
       </div>
 
       {/* Product Content */}
-      <div className="product-content-wrap px-[10px] md:px-[20px] py-[20px] mt-3 md:mt-0 flex flex-col justify-between md:flex-1">
-        <div>
-          <div className="product-category text-sm text-gray-500">
-            <Link href={`/shop/${item?.id}`}>{item?.category?.label}</Link>
+      <div className="product-content p-4 flex flex-col flex-1">
+        <div className="flex-1">
+          <div className="product-category text-xs text-gray-500 uppercase tracking-wider">
+            <Link
+              href={`/category/${item?.category?.id}`}
+              className="hover:text-blue-600 transition-colors"
+            >
+              {item?.category?.label}
+            </Link>
           </div>
-          <h2 className="text-[14px] md:text-[16px] font-semibold text-gray-800 mt-1">
-            <div
-              onClick={() => handleNavigate(`/shop/${item?.id}`)}
-              className="cursor-pointer hover:underline"
+
+          <h2 className="text-sm md:text-base font-semibold text-gray-800 mt-1 line-clamp-2">
+            <Link
+              href={`/shop/${item?.id}`}
+              className="hover:text-blue-600 transition-colors"
             >
               {item?.name}
-            </div>
+            </Link>
           </h2>
+
           <div className="text-xs text-gray-500 mt-1">
             By{" "}
-            <span
-              className="text-blue-600 hover:underline"
+            <Link
+              href={`/brand/${item?.brand?.id}`}
+              className="text-blue-600 hover:underline transition-colors"
             >
-              nangor
-            </span>
+              {item?.brand?.name || "nangor"}
+            </Link>
           </div>
+
+          {/* Rating */}
+          {renderRating()}
         </div>
 
         {/* Price & Add to Cart */}
-        <div className="product-card-bottom md:flex items-end justify-between mt-0 md:mt-3">
-          <div className="product-price flex md:flex-col">
+        <div className="product-footer mt-4">
+          <div className="product-price flex items-center gap-2 mb-3">
             {item?.regularPrice && (
-              <span className="old-price line-through order-2 md:order-1 text-gray-400 ml-2 whitespace-nowrap">
+              <span className="old-price line-through text-gray-400 text-sm">
                 <em className="not-italic">৳</em> {item?.regularPrice}
               </span>
             )}
-            <span className="text-lg font-bold order-1 md:order-2 text-green-600 whitespace-nowrap">
+            <span className="current-price text-lg font-bold text-green-600">
               <em className="not-italic">৳</em> {item?.salePrice || "28.85"}
             </span>
           </div>
-          <div className="add-cart whitespace-nowrap">
-            <AddToCartButton item={item} index={index} />
+
+          <div className="flex  flex-col md:flex-row gap-2">
+            <div className="flex-1 order-2 md:order-1">
+              <AddToCartButton item={item} index={index} />
+            </div>
+            <button
+              onClick={() => handleNavigate(`/shop/${item?.id}`)}
+              className="flex-1 border order-1 md:order-2 border-gray-300 cursor-pointer rounded-lg py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-1"
+            >
+              <i className="ri-eye-line"></i> View
+            </button>
           </div>
         </div>
       </div>

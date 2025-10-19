@@ -126,7 +126,7 @@ const CartPage = () => {
                                 className="w-16 h-16 object-cover rounded-lg border border-gray-200"
                               />
                               <div className="ml-4">
-                                <h3 className="text-lg font-medium text-gray-900">
+                                <h3 className="text-lg break-words max-w-[300px] font-medium text-gray-900">
                                   {product?.name}
                                 </h3>
                                 <p className="text-lg text-gray-500 mt-1">

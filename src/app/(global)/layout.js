@@ -6,6 +6,7 @@ import SubscriptionSection from "../../component/SubscriptionSection";
 import TopSearchBar from "../../component/TopSearchBar";
 import BottomMenuBar from "../../component/BottomMenuBar";
 import BootLoader from "../../component/BootLoader";
+import ShortFooter from "@/component/SortFooter";
 const GlobalLayout = ({ children }) => {
   return (
    <Suspense fallback={<BootLoader show={true} logoText="Nangor"/>}>
@@ -14,7 +15,7 @@ const GlobalLayout = ({ children }) => {
         <MenuBar />
         {children}
         <SubscriptionSection />
-        <Footer />
+        <ShortFooter />
       </div>
       <BottomMenuBar />
     </Suspense>

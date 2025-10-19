@@ -121,14 +121,13 @@ const ProductSection = async ({ searchParams }) => {
 
               // Convert to query string
               const queryString = new URLSearchParams(paramsObj).toString();
-
               return (
                 <li key={item.value}>
                   <Link
                     href={`/?${queryString}`}
                     className={`${
                       categoryId == item.value
-                        ? "text-[#4d321d]"
+                        ? "text-[#4d321d] font-bold"
                         : "text-[#253D4E]"
                     } ${css}`}
                   >
@@ -154,7 +153,7 @@ const ProductSection = async ({ searchParams }) => {
       <div className="hidden sticky h-fit top-0 md:block">
         <SidebarCategory categoryData={categories?.data} />
         <FillByPrice />
-        <NewProducts />
+        {/* <NewProducts /> */}
       </div>
     </div>
   );

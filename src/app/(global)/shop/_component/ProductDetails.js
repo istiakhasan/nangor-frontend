@@ -40,7 +40,7 @@ const ProductDetails = ({ product,open,setOpen }) => {
     <div className="flex-1 h-fit">
       <div className="detail-info">
         <span className="stock-status out-stock">{product?.badge}</span>
-        <h2 className="title-detail text-[40px] mb-2">{product?.name}</h2>
+        <h2 style={{overflowWrap:"break-word"}} className="title-detail text-[40px] max-w-[400px] mb-2">{product?.name}</h2>
         <p onClick={()=>setOpen(true)} style={{color:"#3bb77e"}} className="text-[#3bb77e] underline font-[500] cursor-pointer">একটু পড়ে দেখুন</p>
 
         {/* Product Rating */}
@@ -121,13 +121,13 @@ const ProductDetails = ({ product,open,setOpen }) => {
               Category:{" "}
               <span className="text-brand">{product?.category?.label}</span>
             </li>
-            <li className="mb-5">
+            {/* <li className="mb-5">
               MFG:
               <span className="text-brand">
                 {" "}
                 {moment(product?.createdAt).format("MMM DD YYYY")}
               </span>
-            </li>
+            </li> */}
             <li className="mb-5">
               Author:{" "}
               <span
@@ -145,7 +145,7 @@ const ProductDetails = ({ product,open,setOpen }) => {
             </li>
           </ul>
 
-          <ul className="">
+          {/* <ul className="">
             <li className="mb-5">
               SKU: <a href="#">{product?.sku || "N/A"}</a>
             </li>
@@ -169,25 +169,53 @@ const ProductDetails = ({ product,open,setOpen }) => {
                 8 Items In Stock
               </span>
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
 
-        <Modal
+         <Modal
         open={open}
         onClose={() => setOpen(false)}
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
       >
-        <div className="fixed inset-0 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl w-[600px] max-h-[90vh] flex flex-col shadow-lg">
-            <div className="overflow-y-scroll px-6 py-4 hide-scrollbar">
-           <div className="flex items-center justify-end mb-3"><span className="cursor-pointer" onClick={()=>setOpen(false)}><i className="ri-close-large-fill"></i></span></div>
-              {
-                product?.readMoreImages?.map((item,i)=>(
-                  <img className="w-full md:h-[90vh] h-[70vh] border-[5px] p-2 border-gray-500 mb-2"  src={item} key={i} alt="" />
-                ))
-              }
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 p-4 z-50">
+          {/* Modal Card */}
+          <div className="bg-white rounded-xl w-full max-w-[600px] max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative">
+            {/* Header */}
+            <div className="flex justify-end p-3 border-b border-gray-200">
+              <button
+                onClick={() => setOpen(false)}
+                className="text-gray-600 hover:text-red-500 transition"
+                aria-label="Close modal"
+              >
+                <i className="ri-close-large-fill text-xl"></i>
+              </button>
+            </div>
+
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto p-4 hide-scrollbar">
+              {product?.readMoreImages?.length ? (
+                <div className="flex flex-col gap-4">
+                  {product.readMoreImages.map((item, i) => (
+                    <div key={i} className="w-full">
+                      <Image
+                        src={item}
+                        alt={`Product Image ${i + 1}`}
+                        width={1000}
+                        height={1000}
+                        className="w-full h-auto rounded-lg object-contain bg-gray-50"
+                        placeholder="blur"
+                        blurDataURL="/placeholder.png"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-500 py-6 text-center">
+                  No images available
+                </p>
+              )}
             </div>
           </div>
         </div>

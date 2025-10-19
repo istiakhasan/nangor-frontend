@@ -21,7 +21,7 @@ const NewProducts = async () => {
               <img src={product?.images[0]?.url} alt="#" />
             </div>
             <div className="content">
-              <h5>
+              <h5 style={{overflowWrap:"break-word"}}>
                 <a href="shop-product-detail.html">{product?.name}</a>
               </h5>
               <p className="price mb-0 mt-5">{product?.salePrice}</p>

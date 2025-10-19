@@ -12,6 +12,7 @@ import TopSearchBar from "../component/TopSearchBar";
 import BottomMenuBar from "../component/BottomMenuBar";
 import BootLoader from "../component/BootLoader";
 import AnimatedSection from "../component/AnimatedSection"; // 👈 new client component
+import ShortFooter from "@/component/SortFooter";
 
 export default function Home({ searchParams }) {
   return (
@@ -49,7 +50,7 @@ export default function Home({ searchParams }) {
         <SubscriptionSection />
       </AnimatedSection>
 
-      <Footer />
+      <ShortFooter />
       <BottomMenuBar />
     </Suspense>
   );

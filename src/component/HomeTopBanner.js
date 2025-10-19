@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-
+import Banner1 from '../assets/banner.png'
 export default function BannerCarousel() {
   const banners = [
     {
@@ -15,7 +15,7 @@ export default function BannerCarousel() {
       subtitle: "Big discount",
       desc: "Save up to 50% off on your first order",
       image:
-        "https://nest-frontend-v6.vercel.app/assets/imgs/slider/slider-6.png", // add your banner image in /public/images
+        "https://nest-frontend-v6.vercel.app/assets/imgs/slider/slider-6.png",
     },
     {
       id: 2,
@@ -38,9 +38,9 @@ export default function BannerCarousel() {
       >
         {banners.map((banner) => (
           <SwiperSlide key={banner.id}>
-            <div className="relative h-[200px] md:h-[400px]">
+            <div className="relative h-[200px] md:h-[300px]">
               {/* Text section */}
-              <div className="text-center md:text-left max-w-xl absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="text-center md:text-left md:max-w-xl w-full absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <h1 className="text-xl md:text-6xl font-bold text-gray-800 leading-snug text-center">
                   {banner.title} <br /> {banner.subtitle}
                 </h1>

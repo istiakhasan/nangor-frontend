@@ -48,7 +48,7 @@ export default function AddToCartButton({ item }) {
           }
           handleAddToCart();
         }}
-        className={`text-white px-2 py-1 text-[12px] w-full rounded ${
+        className={`text-white  text-[12px] py-2 w-full h-full rounded ${
           isInCart ? "bg-[#5f2b04]" : "bg-[#4d321d] cursor-pointer"
         }`}
       >

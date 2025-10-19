@@ -16,13 +16,21 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export default function Checkout() {
   const [orderCreateHandler] = useCreateOrderMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -58,17 +66,38 @@ export default function Checkout() {
   const onSubmit = async (data) => {
     try {
       const res = await orderCreateHandler(data).unwrap();
-      if (!!res) {
-        setSnackbarOpen(true);
+      if (res) {
+        setSnackbarOpen({
+          open: true,
+          message: "Order placed successfully!",
+          severity: "success",
+        });
         setIsModalOpen(true);
         reset();
         dispatch(clearCart());
-      } else {
-        setSnackbarOpen(true);
       }
     } catch (error) {
-      console.error(error);
-      setSnackbarOpen(true);
+      // console.error("Order creation failed:", error);
+
+      // Extract backend error message
+      const errorMessage =
+        error?.data?.message ||
+        error?.data?.errorMessages?.[0]?.message ||
+        "Something went wrong! Please try again.";
+
+      // Show error Snackbar
+      setSnackbarOpen({
+        open: true,
+        message: errorMessage,
+        severity: "error",
+      });
+
+      // Optional: redirect to login if unauthorized
+      // if (errorMessage.includes("not authorized")) {
+      //   setTimeout(() => {
+      //     router.push("/login");
+      //   }, 2000);
+      // }
     }
   };
 
@@ -78,25 +107,29 @@ export default function Checkout() {
 
   const handleSnackbarClose = (_, reason) => {
     if (reason === "clickaway") return;
-    setSnackbarOpen(false);
+    setSnackbarOpen({ open: false, message: "", severity: "success" });
   };
 
   return (
-    <main className="main  bg-gray-50 p-4 md:p-8">
+    <main className="main bg-gray-50 p-4 md:p-8">
       {/* Snackbar Notification */}
       <Snackbar
-        open={snackbarOpen}
+        open={snackbarOpen.open}
         autoHideDuration={3000}
         onClose={handleSnackbarClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert
           onClose={handleSnackbarClose}
-          severity="success"
+          severity={snackbarOpen.severity}
           variant="filled"
-          sx={{ width: "100%", backgroundColor: "#4d321d" }}
+          sx={{
+            width: "100%",
+            backgroundColor:
+              snackbarOpen.severity === "success" ? "#4d321d" : "#b91c1c",
+          }}
         >
-          Order placed successfully!
+          {snackbarOpen.message}
         </Alert>
       </Snackbar>
 
@@ -127,8 +160,9 @@ export default function Checkout() {
                 Billing Details
               </h2>
               <form onSubmit={handleSubmit(onSubmit)}>
+                {/* Name & Phone */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div className="form-group">
+                  <div>
                     <label className="block text-gray-700 mb-2 font-medium">
                       Full Name *
                     </label>
@@ -136,7 +170,7 @@ export default function Checkout() {
                       type="text"
                       placeholder="Enter your full name"
                       {...register("receiverName", { required: true })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4d321d] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4d321d]"
                     />
                     {errors.receiverName && (
                       <span className="text-red-500 text-sm mt-1">
@@ -144,7 +178,7 @@ export default function Checkout() {
                       </span>
                     )}
                   </div>
-                  <div className="form-group">
+                  <div>
                     <label className="block text-gray-700 mb-2 font-medium">
                       Phone Number *
                     </label>
@@ -152,7 +186,7 @@ export default function Checkout() {
                       type="tel"
                       placeholder="Enter your phone number"
                       {...register("receiverPhoneNumber", { required: true })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4d321d] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4d321d]"
                     />
                     {errors.receiverPhoneNumber && (
                       <span className="text-red-500 text-sm mt-1">
@@ -162,7 +196,8 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                <div className="form-group mb-6">
+                {/* Address */}
+                <div className="mb-6">
                   <label className="block text-gray-700 mb-2 font-medium">
                     Address *
                   </label>
@@ -170,7 +205,7 @@ export default function Checkout() {
                     type="text"
                     placeholder="Enter your address"
                     {...register("receiverAddress", { required: true })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4d321d] focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4d321d]"
                   />
                   {errors.receiverAddress && (
                     <span className="text-red-500 text-sm mt-1">
@@ -179,8 +214,9 @@ export default function Checkout() {
                   )}
                 </div>
 
+                {/* Division/District/Thana */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                  <div className="form-group">
+                  <div>
                     <label className="block text-gray-700 mb-2 font-medium">
                       Division *
                     </label>
@@ -188,7 +224,7 @@ export default function Checkout() {
                       type="text"
                       placeholder="Division"
                       {...register("receiverDivision", { required: true })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4d321d] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4d321d]"
                     />
                     {errors.receiverDivision && (
                       <span className="text-red-500 text-sm mt-1">
@@ -196,7 +232,7 @@ export default function Checkout() {
                       </span>
                     )}
                   </div>
-                  <div className="form-group">
+                  <div>
                     <label className="block text-gray-700 mb-2 font-medium">
                       District *
                     </label>
@@ -204,7 +240,7 @@ export default function Checkout() {
                       type="text"
                       placeholder="District"
                       {...register("receiverDistrict", { required: true })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4d321d] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4d321d]"
                     />
                     {errors.receiverDistrict && (
                       <span className="text-red-500 text-sm mt-1">
@@ -212,7 +248,7 @@ export default function Checkout() {
                       </span>
                     )}
                   </div>
-                  <div className="form-group">
+                  <div>
                     <label className="block text-gray-700 mb-2 font-medium">
                       Thana *
                     </label>
@@ -220,7 +256,7 @@ export default function Checkout() {
                       type="text"
                       placeholder="Thana"
                       {...register("receiverThana", { required: true })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4d321d] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4d321d]"
                     />
                     {errors.receiverThana && (
                       <span className="text-red-500 text-sm mt-1">
@@ -230,7 +266,8 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                <div className="form-group mb-6">
+                {/* Delivery Note */}
+                <div className="mb-6">
                   <label className="block text-gray-700 mb-2 font-medium">
                     Delivery Note
                   </label>
@@ -238,7 +275,7 @@ export default function Checkout() {
                     rows="3"
                     placeholder="Add any special instructions for delivery"
                     {...register("deliveryNote")}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4d321d] focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4d321d]"
                   ></textarea>
                 </div>
 
@@ -248,53 +285,52 @@ export default function Checkout() {
                     Payment Method
                   </h3>
                   <div className="space-y-3">
-                    {["Cash on delivery"].map(
-                      // {["Cash on delivery", "Online Gateway", "Bank Transfer"].map(
-                      (method) => (
-                        <div
-                          key={method}
-                          className="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                    {["Cash on delivery"].map((method) => (
+                      <div
+                        key={method}
+                        className="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50"
+                      >
+                        <input
+                          type="radio"
+                          id={method}
+                          value={method}
+                          {...register("paymentMethod")}
+                          defaultChecked={method === "Cash on delivery"}
+                          className="h-5 w-5 text-[#4d321d] focus:ring-[#4d321d]"
+                        />
+                        <label
+                          htmlFor={method}
+                          className="ml-3 text-gray-700 font-medium cursor-pointer"
                         >
-                          <input
-                            type="radio"
-                            id={method}
-                            value={method}
-                            {...register("paymentMethod")}
-                            defaultChecked={method === "Cash on delivery"}
-                            className="h-5 w-5 text-[#4d321d] focus:ring-[#4d321d]"
-                          />
-                          <label
-                            htmlFor={method}
-                            className="ml-3 text-gray-700 font-medium cursor-pointer"
-                          >
-                            {method}
-                          </label>
-                        </div>
-                      )
-                    )}
+                          {method}
+                        </label>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                {/* Desktop Place Order Button */}
+                {/* Place Order Button */}
                 <div className="hidden md:block">
                   <button
                     type="submit"
-                    className="w-full bg-[#4d321d] hover:bg-opacity-90 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center"
+                    className="w-full bg-[#4d321d] hover:bg-opacity-90 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02]"
                   >
-                    Place an Order <i className="ri-logout-box-line ml-3"></i>
+                    Place an Order
                   </button>
                 </div>
 
-                {/* Mobile Fixed Place Order Button */}
+                {/* Mobile Order Button */}
                 <div className="md:hidden fixed bottom-[65px] left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-lg z-[9999]">
                   <button
                     type="submit"
-                    className="w-full bg-[#4d321d] hover:bg-[#3a2414] text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center"
+                    className="w-full bg-[#4d321d] hover:bg-[#3a2414] text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02]"
                   >
-                    Place an Order      {cartItems?.cart?.reduce(
+                    Place an Order{" "}
+                    {cartItems?.cart?.reduce(
                       (total, item) => total + item.quantity * item.salePrice,
                       0
-                    ) + 70} Tk
+                    ) + 70}{" "}
+                    Tk
                   </button>
                 </div>
               </form>
@@ -304,23 +340,9 @@ export default function Checkout() {
           {/* Right Column */}
           <div className="lg:col-span-5 order-1 lg:order-2">
             <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 sticky top-8">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-[#4d321d]">
-                  Your Order
-                </h2>
-                <div className="text-right">
-                  <p className="text-gray-600">Subtotal</p>
-                  <p className="text-xl font-bold">
-                    {cartItems?.cart?.reduce(
-                      (total, item) => total + item.quantity * item.salePrice,
-                      0
-                    )}{" "}
-                    Tk
-                  </p>
-                </div>
-              </div>
-              <div className="border-t border-gray-200 pt-4 mb-6"></div>
-
+              <h2 className="text-2xl font-bold text-[#4d321d] mb-6">
+                Your Order
+              </h2>
               <div className="max-h-[500px] overflow-y-auto pr-2">
                 <table className="w-full">
                   <tbody>
@@ -337,43 +359,15 @@ export default function Checkout() {
                           />
                         </td>
                         <td className="py-4">
-                          <h3 className="font-medium text-gray-800">
-                            <Link
-                              href="/shop-product-full"
-                              className="hover:text-[#4d321d] transition-colors"
-                            >
-                              {item?.name}
-                            </Link>
+                          <h3 className="font-medium max-w-[200px] w-[100px] text-gray-800 break-words">
+                            {item?.name}
                           </h3>
-                          <div className="flex items-center mt-1">
-                            <div className="flex text-yellow-400">
-                              {[...Array(5)].map((_, i) => (
-                                <svg
-                                  key={i}
-                                  className={`w-4 h-4 ${
-                                    i < 4 ? "text-yellow-400" : "text-gray-300"
-                                  }`}
-                                  fill="currentColor"
-                                  viewBox="0 0 20 20"
-                                >
-                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                              ))}
-                            </div>
-                            <span className="text-xs text-gray-500 ml-1">
-                              (4.0)
-                            </span>
-                          </div>
-                        </td>
-                        <td className="py-4 text-center">
-                          <span className="text-gray-600">
+                          <span className="text-gray-600 text-sm">
                             x {item?.quantity}
                           </span>
                         </td>
-                        <td className="py-4 text-right">
-                          <span className="font-bold text-[#4d321d]">
-                            {item?.quantity * item?.salePrice} Tk
-                          </span>
+                        <td className="py-4 text-right font-bold text-[#4d321d]">
+                          {item?.quantity * item?.salePrice} Tk
                         </td>
                       </tr>
                     ))}
@@ -387,7 +381,7 @@ export default function Checkout() {
                   <span className="font-medium">
                     BDT{" "}
                     {cartItems?.cart?.reduce(
-                      (total, item) => total + item.quantity * item.salePrice,
+                      (t, i) => t + i.quantity * i.salePrice,
                       0
                     )}
                   </span>
@@ -396,16 +390,12 @@ export default function Checkout() {
                   <span className="text-gray-600">Shipping</span>
                   <span className="font-medium">BDT 70</span>
                 </div>
-                <div className="flex justify-between mb-3">
-                  <span className="text-gray-600">Discount</span>
-                  <span className="font-medium">BDT 0</span>
-                </div>
                 <div className="flex justify-between mt-4 pt-4 border-t border-gray-200">
                   <span className="text-lg font-bold">Total</span>
                   <span className="text-lg font-bold text-[#4d321d]">
                     BDT{" "}
                     {cartItems?.cart?.reduce(
-                      (total, item) => total + item.quantity * item.salePrice,
+                      (t, i) => t + i.quantity * i.salePrice,
                       0
                     ) + 70}
                   </span>
@@ -449,13 +439,8 @@ export default function Checkout() {
           <p className="text-gray-600 mb-4">
             Well notify you once your order is shipped.
           </p>
-          <p className="text-sm text-gray-500">
-            Order ID: #{Math.floor(Math.random() * 1000000)}
-          </p>
         </DialogContent>
-        <DialogActions
-          sx={{ justifyContent: "center", pb: 3, bgcolor: "#f9f9f9" }}
-        >
+        <DialogActions sx={{ justifyContent: "center", pb: 3, bgcolor: "#f9f9f9" }}>
           <Button
             onClick={handleModalClose}
             variant="contained"

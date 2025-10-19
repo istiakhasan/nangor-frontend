@@ -15,7 +15,7 @@ const ProductSection = ({ title, products }) => (
           <img src={item.images[0]?.url} alt={item.name} />
         </div>
         <div className="content">
-          <h5>
+          <h5 style={{overflowWrap:"break-word"}}>
             <a className="hover:text-[#4d321d]" href="shop-product-detail.html">
               {item.name}
             </a>
