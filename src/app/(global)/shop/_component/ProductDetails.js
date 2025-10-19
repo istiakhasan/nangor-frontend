@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -199,7 +200,16 @@ const ProductDetails = ({ product,open,setOpen }) => {
                 <div className="flex flex-col gap-4">
                   {product.readMoreImages.map((item, i) => (
                     <div key={i} className="w-full">
-                      <Image
+                      <img
+                        src={item}
+                        alt={`Product Image ${i + 1}`}
+                        // width={1000}
+                        // height={1000}
+                        className="w-full h-auto rounded-lg object-contain bg-gray-50"
+                        // placeholder="blur"
+                        // blurDataURL="/placeholder.png"
+                      />
+                      {/* <Image
                         src={item}
                         alt={`Product Image ${i + 1}`}
                         width={1000}
@@ -207,7 +217,7 @@ const ProductDetails = ({ product,open,setOpen }) => {
                         className="w-full h-auto rounded-lg object-contain bg-gray-50"
                         placeholder="blur"
                         blurDataURL="/placeholder.png"
-                      />
+                      /> */}
                     </div>
                   ))}
                 </div>

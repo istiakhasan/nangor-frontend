@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
@@ -77,13 +78,20 @@ const ProductDetailsSection = () => {
 
           {imageUrl ? (
             <div className="w-full h-full hover:border-r-[10px]  hover:border-gray-400 transition-all duration-300 rounded-md overflow-hidden flex items-center justify-center">
-              <Image
+              <img
+                src={imageUrl}
+                alt={product?.name || "Product Image"}
+                // width={312}
+                // height={400}
+                className="object-cover w-full h-full transition-transform duration-300 hover:scale-[1.02]"
+              />
+              {/* <Image
                 src={imageUrl}
                 alt={product?.name || "Product Image"}
                 width={312}
                 height={400}
                 className="object-cover w-full h-full transition-transform duration-300 hover:scale-[1.02]"
-              />
+              /> */}
             </div>
           ) : (
             <div className="w-full h-full flex items-center justify-center text-gray-400">
