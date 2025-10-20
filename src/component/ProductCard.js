@@ -44,11 +44,19 @@ export default function ProductCard({ item, index }) {
     return (
       <div className="flex items-center mt-1">
         {[...Array(fullStars)].map((_, i) => (
-          <i key={`full-${i}`} className="ri-star-fill text-yellow-400 text-sm"></i>
+          <i
+            key={`full-${i}`}
+            className="ri-star-fill text-yellow-400 text-sm"
+          ></i>
         ))}
-        {hasHalfStar && <i className="ri-star-half-fill text-yellow-400 text-sm"></i>}
+        {hasHalfStar && (
+          <i className="ri-star-half-fill text-yellow-400 text-sm"></i>
+        )}
         {[...Array(emptyStars)].map((_, i) => (
-          <i key={`empty-${i}`} className="ri-star-line text-gray-300 text-sm"></i>
+          <i
+            key={`empty-${i}`}
+            className="ri-star-line text-gray-300 text-sm"
+          ></i>
         ))}
         <span className="text-xs text-gray-500 ml-1">
           ({item?.reviews || 24})
@@ -58,18 +66,19 @@ export default function ProductCard({ item, index }) {
   };
 
   // ✅ Fix: ensure valid image URL
-  const imageUrl =
-    item?.images?.[0]?.url?.startsWith("http")
-      ? item.images[0].url
-      : `https://i.ibb.co/b5yvq8gc/Untitled-design.png`; // default remote fallback
+  const imageUrl = item?.images?.[0]?.url?.startsWith("http")
+    ? item.images[0].url
+    : `https://i.ibb.co/b5yvq8gc/Untitled-design.png`; // default remote fallback
 
   return (
     <div className="product-card bg-white rounded-xl shadow-md overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group relative">
       <div className="product-image-container relative overflow-hidden">
-        {!isImageLoaded && <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>}
+        {!isImageLoaded && (
+          <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>
+        )}
 
         <div className="relative pt-[100%]">
-          <Image
+          {/* <Image
             src={isImageError ? "/placeholder-book.png" : imageUrl}
             alt={item?.name || "Book"}
             fill
@@ -80,6 +89,15 @@ export default function ProductCard({ item, index }) {
             onLoad={() => setIsImageLoaded(true)}
             onError={() => setIsImageError(true)}
             priority={index < 4}
+          /> */}
+
+          <Image
+            loader={({ src }) => src}
+            src={isImageError ? "/placeholder-book.png" : imageUrl}
+            alt={item?.name || "Book"}
+            fill
+            className="object-contain transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
 
