@@ -1,4 +1,3 @@
-// components/ProductCard.js
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -45,19 +44,11 @@ export default function ProductCard({ item, index }) {
     return (
       <div className="flex items-center mt-1">
         {[...Array(fullStars)].map((_, i) => (
-          <i
-            key={`full-${i}`}
-            className="ri-star-fill text-yellow-400 text-sm"
-          ></i>
+          <i key={`full-${i}`} className="ri-star-fill text-yellow-400 text-sm"></i>
         ))}
-        {hasHalfStar && (
-          <i className="ri-star-half-fill text-yellow-400 text-sm"></i>
-        )}
+        {hasHalfStar && <i className="ri-star-half-fill text-yellow-400 text-sm"></i>}
         {[...Array(emptyStars)].map((_, i) => (
-          <i
-            key={`empty-${i}`}
-            className="ri-star-line text-gray-300 text-sm"
-          ></i>
+          <i key={`empty-${i}`} className="ri-star-line text-gray-300 text-sm"></i>
         ))}
         <span className="text-xs text-gray-500 ml-1">
           ({item?.reviews || 24})
@@ -66,20 +57,20 @@ export default function ProductCard({ item, index }) {
     );
   };
 
+  // ✅ Fix: ensure valid image URL
+  const imageUrl =
+    item?.images?.[0]?.url?.startsWith("http")
+      ? item.images[0].url
+      : `https://i.ibb.co/b5yvq8gc/Untitled-design.png`; // default remote fallback
+
   return (
     <div className="product-card bg-white rounded-xl shadow-md overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group relative">
-      {/* Product Image & Actions */}
       <div className="product-image-container relative overflow-hidden">
-        {/* Image skeleton loader */}
-        {!isImageLoaded && (
-          <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>
-        )}
+        {!isImageLoaded && <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>}
 
-        {/* Product Image - Updated to square aspect ratio */}
         <div className="relative pt-[100%]">
-          {/* Square ratio (1:1) */}
           <Image
-            src={isImageError ? "/placeholder-book.png" : item?.images[0]?.url}
+            src={isImageError ? "/placeholder-book.png" : imageUrl}
             alt={item?.name || "Book"}
             fill
             className={`object-contain transition-transform duration-500 group-hover:scale-105 ${
@@ -92,7 +83,6 @@ export default function ProductCard({ item, index }) {
           />
         </div>
 
-        {/* Badge */}
         {item?.badge && (
           <div className="absolute top-3 left-3 z-10">
             <span
@@ -106,7 +96,6 @@ export default function ProductCard({ item, index }) {
           </div>
         )}
 
-        {/* Wishlist Button */}
         <button
           onClick={toggleWishlist}
           className="absolute top-3 right-3 z-10 bg-white rounded-full p-2 shadow-md transition-all duration-300 hover:bg-red-50 hover:scale-110"
@@ -119,20 +108,17 @@ export default function ProductCard({ item, index }) {
           )}
         </button>
 
-        {/* Quick View Button */}
         <button
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            // Implement quick view modal logic here
           }}
-          className="absolute bottom-3 cursor-pointer right-3 z-10 bg-white rounded-full p-2 shadow-md opacity-0 transition-all duration-300 group-hover:opacity-100 hover:bg-blue-50 hover:scale-110"
+          className="absolute bottom-3 right-3 z-10 bg-white rounded-full p-2 shadow-md opacity-0 transition-all duration-300 group-hover:opacity-100 hover:bg-blue-50 hover:scale-110"
           aria-label="Quick view"
         >
           <i className="ri-eye-line text-gray-600 text-lg group-hover:text-blue-500"></i>
         </button>
 
-        {/* Discount Percentage */}
         {item?.regularPrice && item?.salePrice && (
           <div className="absolute bottom-3 left-3 z-10 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
             {Math.round(
@@ -143,7 +129,6 @@ export default function ProductCard({ item, index }) {
         )}
       </div>
 
-      {/* Product Content */}
       <div className="product-content p-4 flex flex-col flex-1">
         <div className="flex-1">
           <div className="product-category text-xs text-gray-500 uppercase tracking-wider">
@@ -174,11 +159,9 @@ export default function ProductCard({ item, index }) {
             </Link>
           </div>
 
-          {/* Rating */}
           {renderRating()}
         </div>
 
-        {/* Price & Add to Cart */}
         <div className="product-footer mt-4">
           <div className="product-price flex items-center gap-2 mb-3">
             {item?.regularPrice && (
@@ -191,7 +174,7 @@ export default function ProductCard({ item, index }) {
             </span>
           </div>
 
-          <div className="flex  flex-col md:flex-row gap-2">
+          <div className="flex flex-col md:flex-row gap-2">
             <div className="flex-1 order-2 md:order-1">
               <AddToCartButton item={item} index={index} />
             </div>
