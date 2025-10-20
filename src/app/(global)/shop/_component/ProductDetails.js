@@ -200,13 +200,12 @@ const ProductDetails = ({ product,open,setOpen }) => {
                   {product.readMoreImages.map((item, i) => (
                     <div key={i} className="w-full">
                       <Image
+                      loader={({ src }) => src}
                         src={item}
                         alt={`Product Image ${i + 1}`}
                         width={1000}
                         height={1000}
                         className="w-full h-auto rounded-lg object-contain bg-gray-50"
-                        placeholder="blur"
-                        blurDataURL="/placeholder.png"
                       />
                     </div>
                   ))}
