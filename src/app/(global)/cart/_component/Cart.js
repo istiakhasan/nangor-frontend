@@ -28,7 +28,7 @@ const CartPage = () => {
   );
 
   return (
-    <main className=" bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+    <main className=" bg-gradient-to-br mb-[140px] md:mb-[0] from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className=" mx-auto">
         {/* Breadcrumb */}
         <div className="mb-8 p-4 bg-white rounded-lg shadow-sm">
@@ -197,7 +197,7 @@ const CartPage = () => {
                             {product?.name}
                           </h3>
                           <p className="text-sm text-gray-500 mt-1">
-                            ${Number(product?.salePrice).toFixed(2)}
+                            <span className="mr-1 inline-block">BDT</span> {Number(product?.salePrice).toFixed(2)}
                           </p>
 
                           <div className="flex items-center justify-between mt-3">
@@ -270,15 +270,15 @@ const CartPage = () => {
                 <div className="flex justify-between text-lg">
                   <span className="text-gray-600">Subtotal</span>
                   <span className="font-medium">
-                    <span>BDT</span>
+                    <span className="mr-1">BDT</span>
                     {subtotal?.toFixed(2)}
                   </span>
                 </div>
 
-                <div className="flex justify-between text-lg">
+                {/* <div className="flex justify-between text-lg">
                   <span className="text-gray-600">Shipping</span>
                   <span className="font-medium text-green-600">Free</span>
-                </div>
+                </div> */}
 
                 <div className="pt-4 border-t border-gray-200">
                   <div className="flex justify-between">

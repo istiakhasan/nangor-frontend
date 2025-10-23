@@ -71,13 +71,13 @@ export default function ProductCard({ item, index }) {
     : `https://i.ibb.co/b5yvq8gc/Untitled-design.png`; // default remote fallback
 
   return (
-    <div className="product-card bg-white rounded-xl shadow-md overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group relative">
+    <div className="product-card bg-white  overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group relative">
       <div className="product-image-container relative overflow-hidden">
         {!isImageLoaded && (
           <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>
         )}
 
-        <div className="relative pt-[100%]">
+        <div className="relative pt-[100%] bg-white">
           {/* <Image
             src={isImageError ? "/placeholder-book.png" : imageUrl}
             alt={item?.name || "Book"}
@@ -161,7 +161,7 @@ export default function ProductCard({ item, index }) {
           <h2 className="text-sm md:text-base font-semibold text-gray-800 mt-1 line-clamp-2">
             <Link
               href={`/shop/${item?.id}`}
-              className="hover:text-blue-600 transition-colors"
+              className="hover:text-blue-600 text-[14px] transition-colors"
             >
               {item?.name}
             </Link>
@@ -177,7 +177,7 @@ export default function ProductCard({ item, index }) {
             </Link>
           </div>
 
-          {renderRating()}
+          {/* {renderRating()} */}
         </div>
 
         <div className="product-footer mt-4">
