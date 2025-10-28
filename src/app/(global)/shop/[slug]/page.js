@@ -9,7 +9,7 @@ const Page = () => {
       </div>
       <div className="sticky top-[100px] h-fit">
         <NewProducts />
-        <div
+        {/* <div
           className="banner-img wow fadeIn mb-lg-0 animated"
           style={{ visibility: "visible" }}
         >
@@ -26,7 +26,7 @@ const Page = () => {
               Juice
             </h4>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

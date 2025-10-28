@@ -177,7 +177,7 @@ export default function ProductCard({ item, index }) {
             </Link>
           </div>
 
-          {renderRating()}
+          {/* {renderRating()} */}
         </div>
 
         <div className="product-footer mt-4">

@@ -100,28 +100,37 @@ const ProductDetailsSection = () => {
         <ProductInfo product={product} />
       </div>
 
-      <div className="col-span-12">
-        <div className="relative w-full mb-10 p-[20px]">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800">
-              Related Products
-            </h2>
-            <button className="text-gray-500 hover:text-green-600 font-medium">
-              All Product →
-            </button>
-          </div>
+    <div className="col-span-12">
+  <div className="relative w-full mb-10 p-5">
+    {/* Header */}
+    <div className="flex justify-between items-center mb-6">
+      <h2 className="text-2xl font-bold text-gray-800">Related Products</h2>
+      <button className="text-gray-500 hover:text-green-600 font-medium">
+        All Product →
+      </button>
+    </div>
 
-          {/* Slider */}
-          <Slider {...settings}>
-            {relatedProduct?.data?.map((cat) => (
-              <div key={cat.id} className="px-4">
-                <ProductCard item={cat} />
-              </div>
-            ))}
-          </Slider>
+    {/* Responsive Grid */}
+    <div
+      className="
+        grid 
+        gap-5 
+        grid-cols-2 
+        sm:grid-cols-2 
+        md:grid-cols-3 
+        lg:grid-cols-4 
+        xl:grid-cols-5
+      "
+    >
+      {relatedProduct?.data?.map((cat) => (
+        <div key={cat.id} className="w-full">
+          <ProductCard item={cat} />
         </div>
-      </div>
+      ))}
+    </div>
+  </div>
+</div>
+
     </section>
   );
 };
