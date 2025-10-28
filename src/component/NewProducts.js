@@ -25,9 +25,9 @@ const NewProducts = async () => {
                 <a href="shop-product-detail.html">{product?.name}</a>
               </h5>
               <p className="price mb-0 mt-5">{product?.salePrice}</p>
-              <div className="product-rate">
+              {/* <div className="product-rate">
                 <div className="product-rating" style={{ width: "90%" }}></div>
-              </div>
+              </div> */}
             </div>
           </div>
         ))}

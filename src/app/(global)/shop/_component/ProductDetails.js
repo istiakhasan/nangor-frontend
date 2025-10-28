@@ -44,14 +44,14 @@ const ProductDetails = ({ product,open,setOpen }) => {
         <p onClick={()=>setOpen(true)} style={{color:"#3bb77e"}} className="text-[#3bb77e] underline font-[500] cursor-pointer">একটু পড়ে দেখুন</p>
 
         {/* Product Rating */}
-        <div className="product-detail-rating">
+        {/* <div className="product-detail-rating">
           <div className="product-rate-cover text-end">
             <div className="product-rate inline-block">
               <div className="product-rating" style={{ width: "90%" }}></div>
             </div>
             <span className="font-small ml-1 text-muted">(32 reviews)</span>
           </div>
-        </div>
+        </div> */}
 
         {/* Product Price */}
         <div className="clearfix product-price-cover">
