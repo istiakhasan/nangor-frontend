@@ -10,12 +10,14 @@ import ShortFooter from "@/component/SortFooter";
 const GlobalLayout = ({ children }) => {
   return (
    <Suspense fallback={<BootLoader show={true} logoText="Nangor"/>}>
-      <div className="">
+      <div className="mb-[50px] md:mb-0">
         <TopSearchBar />
         <MenuBar />
         {children}
         <SubscriptionSection />
+        <div className="hidden md:block">
         <ShortFooter />
+        </div>
       </div>
       <BottomMenuBar />
     </Suspense>

@@ -116,7 +116,7 @@ const ShopProductSection = async ({ searchParams }) => {
           ))}
 
           {/* Pagination */}
-          <div className="md:col-span-4">
+          <div className="col-span-2 md:col-span-4">
             <Pagination
               totalPages={totalPages}
               currentPage={page}
@@ -131,7 +131,7 @@ const ShopProductSection = async ({ searchParams }) => {
         <FillByPrice page="shop" />
         <NewProducts />
 
-        <div
+        {/* <div
           className="banner-img wow fadeIn mb-lg-0 animated"
           style={{ visibility: "visible" }}
         >
@@ -148,7 +148,7 @@ const ShopProductSection = async ({ searchParams }) => {
               Juice
             </h4>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

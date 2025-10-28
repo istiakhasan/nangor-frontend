@@ -15,6 +15,7 @@ import {
   Button,
   Snackbar,
   Alert,
+  CircularProgress,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 
@@ -26,21 +27,22 @@ export default function Checkout() {
     message: "",
     severity: "success",
   });
-
+  const [orderId, setOrderId] = useState(null);
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const router = useRouter();
-
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
       receiverPhoneNumber: "",
       receiverName: "",
-      shippingCharge: "70",
+      shippingCharge: 0,
       orderSource: "Website",
       currier: "",
       deliveryNote: "",
@@ -64,6 +66,7 @@ export default function Checkout() {
   });
 
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
       const res = await orderCreateHandler(data).unwrap();
       if (res) {
@@ -72,6 +75,8 @@ export default function Checkout() {
           message: "Order placed successfully!",
           severity: "success",
         });
+        console.log(res, "res");
+        setOrderId(res?.orderNumber || res?.orderNumber || null); // ✅ capture order ID
         setIsModalOpen(true);
         reset();
         dispatch(clearCart());
@@ -98,11 +103,16 @@ export default function Checkout() {
       //     router.push("/login");
       //   }, 2000);
       // }
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setOrderId(null);
   };
 
   const handleSnackbarClose = (_, reason) => {
@@ -111,7 +121,7 @@ export default function Checkout() {
   };
 
   return (
-    <main className="main bg-gray-50 p-4 md:p-8">
+    <main className="main bg-gray-50 p-4 md:p-8 mb-[120px] md:mb-[0]">
       {/* Snackbar Notification */}
       <Snackbar
         open={snackbarOpen.open}
@@ -134,7 +144,7 @@ export default function Checkout() {
       </Snackbar>
 
       {/* Breadcrumb */}
-      <div className="page-header breadcrumb-wrap mb-6">
+      {/* <div className="page-header breadcrumb-wrap mb-6">
         <div className="container mx-auto">
           <div className="breadcrumb text-sm text-gray-600">
             <Link
@@ -148,7 +158,7 @@ export default function Checkout() {
             <span className="mx-2">/</span> Checkout
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Container */}
       <div className="container mx-auto mb-12 mt-8">
@@ -308,31 +318,94 @@ export default function Checkout() {
                     ))}
                   </div>
                 </div>
+                <div className="mb-8">
+                  <h3 className="text-lg font-semibold mb-4 text-[#4d321d]">
+                    Delivery Options
+                  </h3>
+                  <div className="space-y-3">
+                    {[
+                      { label: "Inside Dhaka", value: 70 },
+                      { label: "Outside Dhaka", value: 120 },
+                    ].map((option) => (
+                      <div
+                        key={option.label}
+                        className="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50"
+                      >
+                        <input
+                          type="radio"
+                          id={option.label}
+                          value={option.value}
+                          {...register("shippingCharge", {
+                            required: "Please select a delivery option",
+                            validate: (value) =>
+                              Number(value) > 0 ||
+                              "Shipping charge must be greater than 0",
+                          })}
+                          className="h-5 w-5 text-[#4d321d] focus:ring-[#4d321d]"
+                        />
+                        <label
+                          htmlFor={option.label}
+                          className="ml-3 text-gray-700 font-medium cursor-pointer"
+                        >
+                          {option.label} (BDT {option.value})
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+
+                  {errors.shippingCharge && (
+                    <span className="text-red-500 text-sm mt-1 block">
+                      {errors.shippingCharge.message}
+                    </span>
+                  )}
+                </div>
 
                 {/* Place Order Button */}
                 <div className="hidden md:block">
                   <button
+                    disabled={loading}
                     type="submit"
                     className="w-full bg-[#4d321d] hover:bg-opacity-90 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02]"
                   >
-                    Place an Order
+                    {loading ? (
+                      <>
+                        <CircularProgress size={22} sx={{ color: "white" }} />
+                        Placing Order...
+                      </>
+                    ) : (
+                      "Place an Order"
+                    )}
                   </button>
                 </div>
 
                 {/* Mobile Order Button */}
-                <div className="md:hidden fixed bottom-[65px] left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-lg z-[9999]">
-                  <button
-                    type="submit"
-                    className="w-full bg-[#4d321d] hover:bg-[#3a2414] text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02]"
-                  >
-                    Place an Order{" "}
-                    {cartItems?.cart?.reduce(
-                      (total, item) => total + item.quantity * item.salePrice,
-                      0
-                    ) + 70}{" "}
-                    Tk
-                  </button>
-                </div>
+                {!orderId && (
+                  <div className="md:hidden fixed bottom-[65px] left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-lg z-[9999]">
+                    <button
+                      disabled={loading}
+                      type="submit"
+                      className="w-full bg-[#4d321d] hover:bg-[#3a2414] text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02]"
+                    >
+                      {loading ? (
+                        <>
+                          <CircularProgress size={20} sx={{ color: "white" }} />
+                          Placing...
+                        </>
+                      ) : (
+                        <>
+                          Place an Order —{" "}
+                          {Number(
+                            cartItems?.cart?.reduce(
+                              (t, i) => t + i.quantity * i.salePrice,
+                              0
+                            )
+                          ) + Number(watch()?.shippingCharge)}{" "}
+                          Tk
+                        </>
+                      )}
+                    </button>
+                  </div>
+                )}
               </form>
             </div>
           </div>
@@ -388,16 +461,20 @@ export default function Checkout() {
                 </div>
                 <div className="flex justify-between mb-3">
                   <span className="text-gray-600">Shipping</span>
-                  <span className="font-medium">BDT 70</span>
+                  <span className="font-medium">
+                    BDT {watch()?.shippingCharge}
+                  </span>
                 </div>
                 <div className="flex justify-between mt-4 pt-4 border-t border-gray-200">
                   <span className="text-lg font-bold">Total</span>
                   <span className="text-lg font-bold text-[#4d321d]">
                     BDT{" "}
-                    {cartItems?.cart?.reduce(
-                      (t, i) => t + i.quantity * i.salePrice,
-                      0
-                    ) + 70}
+                    {Number(
+                      cartItems?.cart?.reduce(
+                        (t, i) => t + i.quantity * i.salePrice,
+                        0
+                      )
+                    ) + Number(watch()?.shippingCharge)}
                   </span>
                 </div>
               </div>
@@ -413,7 +490,7 @@ export default function Checkout() {
         maxWidth="xs"
         fullWidth
         PaperProps={{
-          sx: { borderRadius: "16px", overflow: "hidden" },
+          sx: { borderRadius: "16px", overflow: "hidden", zIndex: "1000" },
         }}
       >
         <DialogTitle
@@ -436,11 +513,18 @@ export default function Checkout() {
           <h2 className="text-xl font-bold mb-2">
             Your order has been placed successfully!
           </h2>
-          <p className="text-gray-600 mb-4">
-            Well notify you once your order is shipped.
+          {orderId && (
+            <p className="text-gray-800 font-semibold text-lg">
+              🧾 Order ID: <span className="text-[#4d321d]">{orderId}</span>
+            </p>
+          )}
+          <p className="text-gray-600 mt-2">
+            We’ll notify you once your order is shipped.
           </p>
         </DialogContent>
-        <DialogActions sx={{ justifyContent: "center", pb: 3, bgcolor: "#f9f9f9" }}>
+        <DialogActions
+          sx={{ justifyContent: "center", pb: 3, bgcolor: "#f9f9f9" }}
+        >
           <Button
             onClick={handleModalClose}
             variant="contained"
