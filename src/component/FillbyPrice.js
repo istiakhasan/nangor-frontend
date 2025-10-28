@@ -128,10 +128,10 @@ const FillByPrice = ({ page }) => {
 
         <div className="flex justify-between mt-[15px]">
           <label>
-            From: <span className="text-[#4d321d]">${values[0]}</span>
+            From: <span className="text-[#4d321d]"><em className="not-italic">৳</em>{values[0]}</span>
           </label>
           <label>
-            To: <span className="text-[#4d321d]">${values[1]}</span>
+            To: <span className="text-[#4d321d]"><em className="not-italic">৳</em>{values[1]}</span>
           </label>
         </div>
 
